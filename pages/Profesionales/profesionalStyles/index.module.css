@@ -1,0 +1,368 @@
+.createButton{
+    
+    display: flex;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: #0d8003;
+    width: 8%;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 1%;
+    padding : .7%;
+    box-shadow: rgba(0, 100, 20, 0.5) 5px 5px 5px;
+}
+.createButton:hover{
+    background-color: rgb(6, 152, 89);
+    color: white;
+    border-color: #0d8003;
+}
+
+.deleteButton{
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    background:rgba(255, 255, 255, 0.5);
+    width: 180px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    letter-spacing: 2px;
+    margin: 20px;
+    transition: 0.5s;
+}
+.deleteButton:hover{
+    background: #c31432 url('../../../../../../assets/Button/pixel.png');  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #240b36, #c31432) url('../../../../../../assets/Button/pixel.png');  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #240b36, #c31432) url('../../../../../../assets/Button/pixel.png'); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    transition-delay: 0.8s;
+    animation : animate 0.8s steps(10) forwards;
+}
+@keyframes animate{
+    0%
+    {
+        background-position-y:0;
+    }
+    100%
+    {
+        background-position-y: -480px;
+    }
+}
+
+.container{
+    margin: 10%;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../../../../../assets/Login/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: small;
+    overflow: scroll;
+}
+.register_container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    margin-left: 0;
+    overflow: auto;
+}
+.register_container_card{
+    display: flex;
+    width: 93%;
+    height: 90%;
+    border-radius: 8%;
+    position: relative;
+    flex-direction: row;
+}
+.register_container_card_left{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8%;
+    margin: 1%;
+}
+.register_container_card_right{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8%;
+    margin: 0% 1%;
+}
+/*
+.login_container_card::after{
+    position: absolute;
+    top: -4px;
+    left: 328px;
+    content: '';
+    background: rgba(255, 255, 255, 0.2);
+    width: 46%;
+    height: 93%;
+    filter:blur(10px);
+    z-index: -1;
+}
+*/
+/*
+    Formulario styles
+*/
+
+
+.form{
+    background-color: rgba(255,255,255,0.2);
+    margin:auto;
+    width: 100%;
+    max-width: 660px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2%;
+}
+.form_container_left_right{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 0%;
+}
+.form_title{
+    font-size: 2em;
+    margin-bottom: .3em;
+    margin-top: 0%;
+}
+.form_paragraph{
+    font-weight: 300;
+}
+
+.form_link{
+    font-weight: 400;
+    
+}
+.form_container{
+    margin-top: 0%;
+    display: grid;
+    gap: 2.0em;
+}
+.form_group{
+    position: relative;
+    --color: rgb(0, 0, 0);
+
+}
+.form_input{
+    width: -moz-available;
+    background:none;
+    color: rgb(0, 0, 0);
+    outline: none;
+    font-size: 1rem;
+    padding: .6em 3em;
+    border: none;
+    border-bottom: 1px solid var(--color);
+
+}
+
+.form_input:not(:placeholder-shown){
+    color: rgb(0, 0, 0);
+}
+
+.form_input:focus + .form_label,
+.form_input:not(:placeholder-shown)+ .form_label{
+    transform: translateY(-12px) scale(.7);
+    transform-origin: left top;
+    color: rgb(0, 0, 0);
+}
+.form_label{
+    color: var(--color);
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    transform: translateY(10px);
+    transition: transform .5s, color .3s;
+    
+}
+
+.form_line{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #3866f2;
+    transform: scale(0);
+    transform: left bottom;
+
+}
+.form_input:focus ~ .form_line,
+.form_input:not(:placeholder-shown)~ .form_line{
+    transform: scale(1)
+}
+
+.form_submit{
+    background: rgba(24, 233, 149, 0.116);
+    color: #033039;
+    font-weight: 300;
+    font-size: 1rem;
+    padding: .8em 0;
+    border: none;
+    border-radius: .5em;
+    margin-top: 3%;
+    box-shadow: rgba(0, 100, 20, 0.5) 5px 5px 5px;
+}
+.form_submit:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #88B0BA;
+}
+@media(max-width: 425px){
+    .form-title{
+        font-size: 1.8rem;
+    }
+}
+
+/* DROPDOWN 
+.dropdown{
+    position: relative;
+    display: flex;
+    width: auto;
+    background-color: red;
+    height: auto;
+}
+
+.dropdown_title{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.dropdown_items{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    visibility: hidden;
+}
+
+.dropdown:hover .dropdown_items{
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown:hover .dropdown_items p:hover{
+    background-color: aqua;
+}
+*/
+/*DROPDOWN WITH SELECTS*/
+.custom_select{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    border-bottom: 1px solid #88B0BA;
+    position: relative;
+    background-color: rgba(120, 150, 117, 0.2);
+    cursor: pointer;
+}
+.custom_select select{
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    font-size:medium;
+    padding: 0.3em 1.5em;
+    background-color: transparent;
+    appearance: none;
+    color: rgb(0, 0, 0);
+    border:none;
+}
+.select_label{
+    width: 17%;
+    height: 100%;
+    font-weight: bold;
+}
+.custom_arrow{
+    display: flex;
+    position: absolute;
+    width: 10%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    background-image: url("../../../../../../assets/Icons/arrow_dropdown.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 85%;
+    pointer-events: none;
+}
+
+/* INPUT PHOTO */
+.container_input_photo{
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.input_photo{
+    display: none;
+}
+.label_title_input_photo,
+.label_input_photo,
+.input_photo_btn{
+    font-size: small;
+    display: inline-block;
+    height: 100%;
+    border-radius: 3%;
+}
+.label_title_input_photo{
+    width: 20%;
+    padding-right: 2%;
+    padding-bottom: 4%;
+}
+.label_input_photo{
+    width: 52%;
+    
+    border-radius: 4%;
+}
+.input_photo_btn{
+    background-color:rgba(120, 150, 117, 0.2);
+    background-image: url("../../../../../../assets/Icons/add_to_photos.svg");
+    background-position:right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 25%;
+    cursor: pointer;
+}
+
+.input_photo_btn:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+.checkBoxContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content : space-evenly;
+    padding: 2%;
+}
+.checkBoxVerticalContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

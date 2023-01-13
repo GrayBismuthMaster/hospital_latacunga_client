@@ -1,0 +1,96 @@
+import './App.css'
+//Index pages
+import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "../pages/login";
+import Home from "../pages/home";
+//INCIO USERS
+import Users from "../pages/users";
+import CreateUser from "../pages/Users/CreateUser"
+import EditUser from "../pages/Users/EditUser"
+import DeleteUser from "../pages/Users/DeleteUser"
+//FIN USERS
+//INICIO PROFESIONALES
+import Profesionales from '../pages/profesionales'
+import CreateProfesional from "../pages/Profesionales/CreateProfesional"
+import EditProfesional from "../pages/Profesionales/EditProfesional"
+import DeleteProfesional from "../pages/Profesionales/DeleteProfesional"
+//FIN PROFESIONALES
+//INICIO CONSULTORIOS
+import Consultorios from '../pages/consultorios'
+import CreateConsultorio from "../pages/Consultorios/CreateConsultorio"
+import EditConsultorio from "../pages/Consultorios/EditConsultorio"
+import DeleteConsultorio from "../pages/Consultorios/DeleteConsultorio"
+//FIN CONSULTORIOS
+//INICIO ESPECIALIDADES
+import Especialidades from '../pages/especialidades'
+import CreateEspecialidad from "../pages/Especialidades/CreateEspecialidad"
+import EditEspecialidad from "../pages/Especialidades/EditEspecialidad"
+import DeleteEspecialidad from "../pages/Especialidades/DeleteEspecialidad"
+//FIN ESPECIALIDADES
+  //INICIO DOCUMENTOS
+    //INICIO HISTORIAS CLINICAS
+      import HistoriasClinicas from '../pages/historiasClinicas'
+      import CreateHistoriaClinica from "../pages/HistoriasClinicas/CreateHistoriaClinica"
+      import EditHistoriaClinica from "../pages/HistoriasClinicas/EditHistoriaClinica"
+      import DeleteHistoriasClinica from "../pages/HistoriasClinicas/DeleteHistoriaClinica"
+    //FIN HISTORIAS CLINICAS
+  //FIN DOCUMENTOS
+  
+import ProtectedRoutes from './ProtectedRoutes'
+import ReadEspecialidadesList from '../pages/Especialidades/ReadEspecialidadesList';
+import DeleteHistoriaClinica from '../pages/HistoriasClinicas/DeleteHistoriaClinica';
+function App() {
+  return (
+    <>
+      <Router> 
+              {/* PUBLIC ROUTES */}
+        <Routes>
+          <Route path="/" element={<Login />}/>
+              {/* PRIVATE ROUTES */}
+          <Route element={<ProtectedRoutes/>}>  
+                <Route path="/home" element={<Home/>}/>
+                {/* SECCION DE USUARIOS  */}
+                <Route path="/users/*" element={<Users/>}>
+                  <Route path="new" element={<CreateUser/>}/>
+                  <Route path='edit' element={<EditUser/>}/>
+                  <Route path="delete" element={<DeleteUser/>}/>
+                </Route>
+                {/* FIN SECCION DE USUARIOS  */}
+                {/* SECCION DE CONSULTORIOS  */}
+                <Route path="/consultorios/*" element={<Consultorios/>}>
+                  <Route path="new" element={<CreateConsultorio/>}/>
+                  <Route path='edit' element={<EditConsultorio/>}/>
+                  <Route path="delete" element={<DeleteConsultorio/>}/>
+                </Route>
+                {/* FIN SECCION DE CONSULTORIOS  */}
+                {/* SECCION DE ESPECIALIDADES  */}
+                <Route path="/especialidades/*" element={<Especialidades/>}>
+                  <Route path="show/*" element={<ReadEspecialidadesList/>}>
+                    <Route path="new" element={<CreateEspecialidad/>}/>
+                    <Route path='edit' element={<EditEspecialidad/>}/>
+                    <Route path="delete" element={<DeleteEspecialidad/>}/>
+                  </Route>
+                </Route>
+                {/* FIN SECCION DE ESPECIALIDADES */}
+                {/* SECCION DE PROFESIONALES  */}
+                <Route path="/profesionales/*" element={<Profesionales/>}>
+                  <Route path="new" element={<CreateProfesional/>}/>
+                  <Route path='edit' element={<EditProfesional/>}/>
+                  <Route path="delete" element={<DeleteProfesional/>}/>
+                </Route>
+                {/* FIN SECCION DE PROFESIONALES  */}
+                {/* SECCION DE PROFESIONALES  */}
+                <Route path="/historias-clinicas/*" element={<HistoriasClinicas/>}>
+                  <Route path="new" element={<CreateHistoriaClinica/>}/>
+                  <Route path='edit' element={<EditHistoriaClinica/>}/>
+                  <Route path="delete" element={<DeleteHistoriaClinica/>}/>
+                </Route>
+                {/* FIN SECCION DE PROFESIONALES  */}
+          </Route>
+        </Routes>
+      </Router>
+    </>
+  );
+}
+
+export default App

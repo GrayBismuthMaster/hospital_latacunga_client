@@ -1,0 +1,130 @@
+
+.header{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+
+}
+
+.cta{
+    margin: auto;
+    background-color: royalblue;
+    color: #fff;
+    text-decoration: none;
+    padding: 1.2em 3em;
+    border-radius: .4em;
+}
+.modal{
+    
+    font-family : 'Montserrat', sans-serif;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+
+    transition: opacity .5s ease-in-out;
+    z-index: 999;
+}
+
+.modal:target{
+    --opacity : 1;
+    --pointer : unset;
+}
+
+.modal_container{
+    margin: auto;
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90%;
+    overflow: hidden;
+    text-align: center;
+    padding: 2.5em 1.5em;
+    border-radius: 1em;
+    overflow: auto;
+}
+.modal:target .modal_container{
+    animation : show 1s .5s backwards;
+}
+@keyframes show{
+    0% {
+        transform: translateY(-150vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.modal_picture { 
+    width: 90%;
+    margin: 0 auto;
+    max-width: 400px;
+    margin-bottom: 2em;
+}
+.modal:target .modal_picture{
+    animation : scale .5s 1.5s backwards;
+}
+@keyframes scale{
+    0%{
+        transform: scale(0);
+    }
+}
+.modal_img{
+    width: 100%;
+    display: block;
+    height: 50vh;
+    box-shadow: rgba(0,0,0,.2) 10px 10px 10px;
+}
+
+.modal_title{
+    font-size: 2.5em;
+    font-weight: 500;
+}
+
+.modal_title__bold{
+    font-weight: 700;
+}
+.modal_paragraph{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    line-height: 1.5;
+}
+.modal_close{
+    display: inline-block;
+    border: 1px solid #333;
+    padding: 1em 2em;
+    text-decoration: none;
+    font-weight: 700;
+    color: #333;
+    border-radius: .4em;
+}
+
+@media (max-width: 600px){
+    .modal_title{
+        font-size: 1.7rem;
+    }
+}
+.containerExitButton{
+    display: flex;
+    justify-content: flex-end;
+    height: 20%;
+}
+.exitButton{
+    display: flex;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: #b63535a5;
+    width: 5%;
+    justify-content: center;
+    border-radius: 100%;
+    margin: 1%;
+    height: 10%;
+}
+.exitButton:hover{
+    cursor: pointer;
+    background-color: rgba(223, 52, 52, 0.8);
+    color: rgb(255, 255, 255);
+    border-color: #333;
+}

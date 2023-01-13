@@ -1,0 +1,113 @@
+.listaUL{
+    position: relative;
+    width:100%;
+    padding: 2%;
+    box-sizing: border-box;
+    background-color: rgb(236, 189, 189);
+    box-shadow: inset 0 0 2% rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.itemLI{
+    display:flex;
+    background: rgba(255,255,255,0.1);
+    padding: 0.5%;
+    color: #fff;
+    margin: 0.5% 0;
+    transition: .5s;
+}
+.icon{
+    width: 40%;
+}
+.nombre{
+    width: 50%;
+    margin-left: 15%;
+}
+
+.icon:hover{
+    transform: scale(1.64);
+    background-color: rgba(149, 144, 229, 0.147);
+    border-radius: 40%;
+}
+.button{
+    background-color: rgba(0, 0, 0, 0.1);
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 0.9em;
+    border-radius: 8px;
+    padding: 0.5% 1%;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.button:hover{
+    background-color: rgb(126, 126, 214);
+}
+
+.home{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.welcome_title{
+    display: flex;
+    margin-top: -10%;
+}
+.container { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    justify-items: center;
+    width: 100%;
+    height: 100%;
+}
+.card{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 50%;
+    height: 45%;
+    background-color: rgba(0, 0, 0,.2);
+    box-shadow: rgba(0, 0, 0, 0.6) 8px 8px 8px ;
+    border-radius: 7%;
+    margin: 1.4%;
+    padding: auto;
+}
+.card_list{
+    position: relative;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: .5s;
+    width: 80%;
+    height: 80%;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.6) 8px 8px 8px ;
+
+    animation-name: example;
+    animation-duration: 3s;  
+    animation-delay: 2s;
+    animation-fill-mode: backwards;
+}
+@keyframes example {
+    from {top: -20px; background-color: yellow;}
+    to {top: 0px;}
+  }
+.card_title { 
+    color: rgba(255, 255, 255, 0.8);
+}
+.img{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}

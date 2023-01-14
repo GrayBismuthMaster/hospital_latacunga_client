@@ -10,6 +10,10 @@ import notificationStyles from '../../../../styles/divNotifications/divNotificat
 import {useS3Upload} from '../../hooks/useS3Upload';
 import HospitalLatacungaApi from '../../apis/HospitalLatacungaApi';
 import {DatePickerField} from '../../components/DatePicker/DatePicker'
+
+//Componentes
+import {Diagnostico} from '../../components/Diagnostico/Diagnostico';
+
 import { HistoriasClinicasData } from '../../data/historiasClinicas/HistoriasClinicasData';
 import {RevisionActualData} from '../../data/historiasClinicas/RevisionActualData';
 import {ExamenFisicoData} from '../../data/historiasClinicas/ExamenFisicoData';
@@ -17,7 +21,7 @@ import {ExamenFisicoData} from '../../data/historiasClinicas/ExamenFisicoData';
 import { FieldFormik } from '../../components/FormikFields/FieldFormik';
 import { Dropdown } from 'semantic-ui-react';
 
-import { fetchEspecialidadesByConsultorioId } from "../../redux/actions/especialidades";
+import { fetchProfesionalesByEspecialidadId } from "../../redux/actions/profesionales";
 import { fetchUsersByRole } from '../../redux/actions/users';
 import { TableUsers } from '../../interfaces';
 //SELECT 
@@ -66,19 +70,23 @@ const CreateHistoriaClinica = (props : any) => {
         revisionActual : [],
         examenFisico : []
     })
+    const [fieldDiagnostico, setFieldDiagnostico] = useState([]);
+    const [diagnostico, setDiagnostico] = useState([]);
 
     useEffect(() => {
         
-        props.fetchUsersByRole("2");
-        console.log('usuarios clientes', props.users)
         //PROP DE CONSULTORIO
         console.log('objeto recibido de location', location.state)
-        props.fetchEspecialidadesByConsultorioId((location as any).state.datosFila.id_consultorio)
-        console.log('especialidades',props.especialidades)
+        props.fetchProfesionalesByEspecialidadId((location as any).state.datosFila.id)
+        console.log('profesionales',props.profesionales)
+
+        props.fetchUsersByRole("2");
+        console.log('usuarios clientes', props.users)
       return () => {
         
       };
     }, [])
+
     useEffect(() => {
         console.log('cambio en revisión', selectState)
 
@@ -94,43 +102,29 @@ const CreateHistoriaClinica = (props : any) => {
       };
     }, [selectState.examenFisico])
 
+
+    const onChangeDiagnostic = (value:any)=>{
+        console.log(value);
+        setDiagnostico([...diagnostico, value])
+    }
+    useEffect(()=>{
+        console.log('Valor global de los diagnosticos', diagnostico);
+    },[diagnostico])
     return( 
         <>
             <Formik
                 initialValues={{
-                    primer_nombre:"",
-                    segundo_nombre:"",
-                    apellido_paterno:"",
-                    apellido_materno:"",
-                    cedula_identidad:"",
                     codigo:"",
                     motivo_consulta:"",
                     antecedentes_personales:"",
                     antecedentes_familiares:"",
                     enfermedad_actual:"",
-                    revision_actual_organos_sistemas_sentidos:"",
-                    revision_actual_organos_sistemas_respiratorio:"",
-                    revision_actual_organos_sistemas_cardiovascular:"",
-                    revision_actual_organos_sistemas_digestivo:"",
-                    revision_actual_organos_sistemas_dental:"",
-                    revision_actual_organos_sistemas_urinario:"",
-                    revision_actual_organos_sistemas_musculo_esqueletico:"",
-                    revision_actual_organos_sistemas_endocrinico:"",
-                    revision_actual_organos_sistemas_hemo_linfaticos:"",
-                    revision_actual_organos_sistemas_nervioso:"",
                     signos_vitales_antropometria_fecha_medicion:"",
                     signos_vitales_antropometria_temperatura:"",
                     signos_vitales_antropometria_presion_arterial:"",
                     signos_vitales_antropometria_pulso:"",
                     signos_vitales_antropometria_peso:"",
                     signos_vitales_antropometria_talla:"",
-                    examen_fisico_regional_cabeza:"",
-                    examen_fisico_regional_cuello:"",
-                    examen_fisico_regional_torax:"",
-                    examen_fisico_regional_abdomen:"",
-                    examen_fisico_regional_pelvis:"",
-                    examen_fisico_regional_extremidades:"",
-                    diagnostico:"",
                     firma:"",
                 }}
                 // validate = {(values)=>{
@@ -148,21 +142,16 @@ const CreateHistoriaClinica = (props : any) => {
                 //     }
                 //     return errores;
                 //  }}
-                onSubmit = {(values, {resetForm})=>{
+                onSubmit = {async (values, {resetForm})=>{
                     //LA IMAGEN Y EL ESTADO ENVIO
                     console.log('valores del form',values);
-                    console.log((values as any).imagen.type)
-                    HospitalLatacungaApi.post('/uploads/signS3',{
-                        fileName :formatFilename((values as any).imagen.name),
-                        fileType : (values as any).imagen.name
-                    }).then(async (res)=>{
-                        console.log("respues",res);
-                        const { signedRequest, url } = res.data;
-                        const resUpload = await uploadToS3((values as any).imagen, signedRequest);
-                        console.log("RESPUESTA DE S3", resUpload, "URL", url);
-                        await props.createHistoriaClinica({ ... values, imagen : url, estado : true});
-                    })
-                    resetForm();
+                    console.log('valores diagnostico', diagnostico);
+                    console.log('valores revision', selectState.revisionActual);
+                    console.log('valores examen fisiico', selectState.examenFisico)
+                    let id_especialidad_historia_clinica = (location as any).state.datosFila.id;
+                    
+                    await props.createHistoriaClinica({ ... values, id_especialidad_historia_clinica ,diagnostico,examen_fisico_regional : selectState.examenFisico, revision_actual_organos_sistemas : selectState.revisionActual  });
+                    // resetForm();
                 }}
             >
                 {
@@ -186,6 +175,13 @@ const CreateHistoriaClinica = (props : any) => {
                                                 )
                                             })
                                         }
+                                        {/* FECHA ANTROPOMETRIA MEDICION  */}
+                                            <div className={styles.form_group}>
+                                                
+                                                <DatePickerField name="signos_vitales_antropometria_fecha_medicion" className={`${styles.form_input} ${styles.date_size}` }/>
+                                                {/* {errors.telefono ?? <div className = {notificationStyles.error}>{errors.telefono}</div>} */}
+                                            </div>
+                                        {/* FIN FECHA ANTROPOMETRIA MEDICION  */}
                                         {/* CAMPO PARA MULTISELECT CON DESCRIPCION Y CONDICIONIAL */}
                                             {/* Si el selectState.revisionActual tiene otro campo no borrar caso contrario si  */}
                                         <Select
@@ -273,7 +269,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                                     
                                                                                     setSelectState({
                                                                                         ...selectState,
-                                                                                        revisionActual : selectState.revisionActual.map((revisado):any =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any), Descripcion : valor.target.value  })
+                                                                                        revisionActual : selectState.revisionActual.map((revisado):any =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any) })
                                                                                     })
                                                                                 }
                                                                                 
@@ -299,22 +295,22 @@ const CreateHistoriaClinica = (props : any) => {
                                         {/* CAMPO MULTISELECT PARA EXAMEN FISICO REGIONAL  */}
                                             {/* Si el selectState.revisionActual tiene otro campo no borrar caso contrario si  */}
                                             <Select
-                                            options = {ExamenFisicoData}
-                                            isMulti
-                                            onChange={(option:any)=>{
-                                                let previousArray = selectState.examenFisico;
-                                                let optionShift = option.length > 1 ? option.shift() : option;
-                                                console.log('array de option shift', optionShift)
+                                                options = {ExamenFisicoData}
+                                                isMulti
+                                                onChange={(option:any)=>{
+                                                    let previousArray = selectState.examenFisico;
+                                                    let optionShift = option.length > 1 ? option.shift() : option;
+                                                    console.log('array de option shift', optionShift)
 
-                                                let nuevoArray = previousArray.concat(option);
-                                                console.log('array con concat', nuevoArray);
+                                                    let nuevoArray = previousArray.concat(option);
+                                                    console.log('array con concat', nuevoArray);
 
-                                                setSelectState({...selectState, examenFisico :  nuevoArray })
-                                            
-                                            }}
-                                            getOptionValue = {(opciones)=>opciones.value}
-                                            getOptionLabel = {(opciones)=>opciones.name}
-                                            placeholder = {'Examen físico regional'}
+                                                    setSelectState({...selectState, examenFisico :  nuevoArray })
+                                                
+                                                }}
+                                                getOptionValue = {(opciones)=>opciones.value}
+                                                getOptionLabel = {(opciones)=>opciones.name}
+                                                placeholder = {'Examen físico regional'}
                                             // noOptionsMessage = {'no'}
                                         />
                                         {/* GENERAR EL VALOR EN CP O SP Y LA DESCRIPCION SI ES QUE EXISTE */}
@@ -382,7 +378,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                                     
                                                                                     setSelectState({
                                                                                         ...selectState,
-                                                                                        examenFisico : selectState.examenFisico.map((revisado):any =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any), Descripcion : valor.target.value  })
+                                                                                        examenFisico : selectState.examenFisico.map((revisado):any =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any) })
                                                                                     })
                                                                                 }
                                                                                 
@@ -405,37 +401,37 @@ const CreateHistoriaClinica = (props : any) => {
                                         }
 
                                         {/* FIN CAMPO MULTISELECT PARA EXAMEN FISICO REGIONAL  */}
-
-                                        {/* CAMPO PARA IMAGENES */}
-                                        <div className={styles.form_group}>
-                                            <div className={styles.container_input_photo}>
-                                                    <label className={styles.label_title_input_photo}>Imagen</label>
+                                        
+                                        {/* DIAGNOSTICO */}
+                                        <label>
+                                            Diagnosticos
+                                        </label>
+                                            <input
+                                                type={'button'}
+                                                value="Agregar diagnóstico"
+                                                onClick={()=>{setFieldDiagnostico([...fieldDiagnostico, <Diagnostico onChange={onChangeDiagnostic}/>] )}}
+                                            />
+                                            {
+                                                <div>
                                                     {
-                                                        fileName ? <label className={styles.label_input_photo}>{fileName}</label>
-                                                        : <label className={styles.label_input_photo}></label>
+                                                        fieldDiagnostico
                                                     }
-                                                    
-                                                    <Field 
-                                                        name='imagen'
-                                                        component={(e:any)=>renderImageField(e)}
-                                                        type="file"
-                                                    />
-                                            </div>
-                                        </div>
-                                        {/* FIN CAMPO PARA IMAGENES  */}
+                                                </div>
+                                            }
+                                        {/* FIN DIAGNOSTICO  */}
 
                                         {/* CAMPO PARA ESPECIALIDADES */}
                                         <Dropdown
                                             selection
-                                            placeholder="Seleccione una especialidad"
+                                            placeholder="Seleccione un profesional"
                                             options={
-                                                props.especialidades.map((especialidad:any)=>{
-                                                    return {value : especialidad.id, text : especialidad.nombre_especialidad}
+                                                props.profesionales.map((profesional:any)=>{
+                                                    return {value : profesional.id, text : profesional.nombre_profesional}
                                                 })
                                             }
                                             value={dropdownSelectedValue}
                                             onChange={(_, { value }:any) => {
-                                                setFieldValue("id_especialidad_historia_clinica", value);
+                                                setFieldValue("id_profesional_historia_clinica", value);
                                                 setDropdownSelectedValue(value)
                                             }}
                                         />
@@ -474,17 +470,17 @@ const CreateHistoriaClinica = (props : any) => {
 //     form : 'historiaClinicaCreate'
 //   })(CreateHistoriaClinica)
 const mapStateToProps = (state : any) => {
-    const { especialidades, users } = state;
+    const { profesionales, users } = state;
     console.log('estado de todo en create historia clinica',state)
     return {
-      especialidades : Object.values(especialidades),
+      profesionales : Object.values(profesionales),
       users : Object.values(users)
     }
 }
 
 export default connect(
     mapStateToProps,
-    { fetchEspecialidadesByConsultorioId,fetchUsersByRole, createHistoriaClinica}
+    { fetchProfesionalesByEspecialidadId,fetchUsersByRole, createHistoriaClinica}
 )(CreateHistoriaClinica)
 // export default connect(
 //     null,

@@ -1,15 +1,12 @@
 import { startTransition, useEffect, useState } from "react";
 import {connect} from 'react-redux';
-
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from '@mui/icons-material/Edit';
@@ -20,9 +17,9 @@ import {  green, yellow, red, blue } from '@mui/material/colors';
 import styles from "../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
 
-import { fetchHistoriasClinicasByEspecialidadId } from "../../redux/actions/historiasClinicas";
+import { fetchEvolucionesPrescripcionesByHistoriaClinicaId } from "../../redux/actions/evolucionesPrescripciones";
 import { useLocation, useNavigate } from "react-router-dom";
-import {TableHistoriasClinicas} from '../../interfaces'
+import {TableEvolucionesPrescripciones} from '../../interfaces'
 import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
   table: {
@@ -30,7 +27,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ReadHistoriasClinicasList = (props:any) => {
+const ReadEvolucionesPrescripcionesList = (props:any) => {
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,17 +35,18 @@ const ReadHistoriasClinicasList = (props:any) => {
   const [rows, setRows] = useState([])
   // const [keys, setKeys] = useState([])
 useEffect(()=>{
-  console.log('prop de consultorio',location)
-  props.fetchHistoriasClinicasByEspecialidadId((location as any).state.datosFila.id);
+  console.log('props desde evoluciones',location)
+  props.fetchEvolucionesPrescripcionesByHistoriaClinicaId((location as any).state.datosFila.historia_clinica_id);
 },[])
 
   useEffect(() => {
-      setRows(props.historiasClinicas);
+      
+      setRows(props.evolucionesPrescripciones);
       setDidLoad(true)
     return () => {
       
     }
-  },[didLoad ,JSON.stringify(props.historiasClinicas)])
+  },[didLoad ,JSON.stringify(props.evolucionesPrescripciones)])
 
   useEffect(()=>{
     return ()=>{
@@ -61,7 +59,7 @@ useEffect(()=>{
   const classes = useStyles();
 
   const requestSearch = (searchedVal:any) => {
-    const filteredRows = props.historiasClinicas.filter((row:any) => {
+    const filteredRows = props.evolucionesPrescripciones.filter((row:any) => {
       return row.nombre.toLowerCase().includes(searchedVal.toLowerCase());
     });
     setRows(filteredRows);
@@ -81,10 +79,7 @@ useEffect(()=>{
     console.log(props.currentTarget.id)
     navigate('delete', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
   }
-  const evolucionPrescripcionRow = (props: any)=>{
-    console.log(props.currentTarget.id)
-    navigate('/evoluciones-prescripciones', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
-  }
+  
   // return(
     //   <SearchingTable rows = {rows} keys = {keys}/>
     // )
@@ -112,7 +107,7 @@ useEffect(()=>{
           <AddIcon style={{marginRight:'5%'}}/>
               Crear
       </NavLink>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper>
         <SearchBar
           value={searched}
           onChange={(searchVal) => requestSearch(searchVal)}
@@ -175,27 +170,20 @@ useEffect(()=>{
               
             {
               //RECORRIDO DE VALORES POR OBJETO
-              Object.values(rows).map((valor:TableHistoriasClinicas, index)=>{
+              Object.values(rows).map((valor:TableEvolucionesPrescripciones, index)=>{
                 return (
                   <TableRow key={index} >
-                     <TableCell align="right">{valor.codigo}</TableCell>
-                     <TableCell align="right">{valor.motivo_consulta}</TableCell>
-                     <TableCell align="right">{valor.enfermedad_actual}</TableCell>
-                     <TableCell align="right">{
-                      valor.diagnostico.map((diagnos)=>diagnos.descripcion)
-                     }</TableCell>
-                     <TableCell align="right">{valor.planes_tratamiento}</TableCell>
-                     <TableCell align="right">{`${valor.usuario_historia_clinica.primer_nombre} ${valor.usuario_historia_clinica.apellido_paterno}`}</TableCell>
-                     <TableCell align="right">{valor.planes_tratamiento}</TableCell>
+                     <TableCell align="right">{valor.num_hoja}</TableCell>
+                     <TableCell align="right">{valor.historia_clinica_id.codigo}</TableCell>
+                     <TableCell align="right">{valor.id_usuario_evolucion_prescripcion.primer_nombre}</TableCell>
+                     <TableCell align="right">{valor.id_consultorio_evolucion_prescripcion.nombre_consultorio}</TableCell>
                      
                      <TableCell align="right" > 
                       <MedicationIcon 
                           id={
                             JSON.stringify(
                               {
-                                historia_clinica_id : valor.id, 
-                                usuario_historia_clinica : valor.usuario_historia_clinica,
-                                consultorio_historia_clinica : (location as any).state.datosFila.id_consultorio
+                                id : valor.id, 
                               }
                             )
                           } 
@@ -207,7 +195,7 @@ useEffect(()=>{
                           className={styles.icon} 
                           onClick={
                             (props)=>{
-                              evolucionPrescripcionRow(props)
+                              editRow(props)
                               }}
                         />
                         <EditIcon 
@@ -215,10 +203,6 @@ useEffect(()=>{
                             JSON.stringify(
                               {
                                 id : valor.id, 
-                                codigo : valor.codigo,
-                                motivo_consulta : valor.motivo_consulta,
-                                enfermedad_actual : valor.enfermedad_actual,
-                                planes_tratamiento : valor.planes_tratamiento,
                               }
                             )
                           } 
@@ -238,7 +222,6 @@ useEffect(()=>{
                         id={
                           JSON.stringify(
                             {
-                              codigo : valor.codigo, 
                               id : valor.id
                             }
                           )
@@ -268,31 +251,33 @@ useEffect(()=>{
       </Paper>
       </>
     )
+  
+  
 }
 
 const mapStateToProps = (state : any) => {
-  const { historiasClinicas } = state;
+  const { evolucionesPrescripciones } = state;
   //AUTOMATIZACION DE ROWS DE TABLAS
 
     //ACCEDER A LOS NOMBRES DE LAS COLUMNAS
     //CREAMOS UNA VARIABLE GLOBAL PARA EL POSTERIOR ALMACENAMIENTO DE CLAVES
     let keys = {};
       //LE DAMOS BREAK PARA QUE SOLO OBTENGA LOS NOMBRES DE LAS COLUMNAS DE LA PRIMERA FILA
-      for(const historiaClinica in historiasClinicas){
-        keys = Object.keys(historiasClinicas[historiaClinica]);
+      for(const evolucionPrescripcion in evolucionesPrescripciones){
+        keys = Object.keys(evolucionesPrescripciones[evolucionPrescripcion]);
         break;
       }
     //FIN ACCEDER A LOS NOMBRES DE LAS COLUMNAS
     //OBTENEMOS LOS NOMBRES DE LAS COLUMNAS YA QUE ESTA GUARDADO EN UN ARRAY
-      const historiaClinicaKeys = Object.values(keys);
+      const evolucionPrescripcionKeys = Object.values(keys);
   //FIN AUTOMATIZACION DE ROWS DE TABLAS
   return {
-    historiasClinicas : Object.values(historiasClinicas),
-    keys : historiaClinicaKeys
+    evolucionesPrescripciones : Object.values(evolucionesPrescripciones),
+    keys : evolucionPrescripcionKeys
   }
 }
 
 export default connect(
   mapStateToProps,
-  {fetchHistoriasClinicasByEspecialidadId}
-)(ReadHistoriasClinicasList);
+  {fetchEvolucionesPrescripcionesByHistoriaClinicaId}
+)(ReadEvolucionesPrescripcionesList);

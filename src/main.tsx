@@ -36,6 +36,7 @@ const rootReducer = combineReducers({
   consultorios : reducers.consultoriosReducer,
   especialidades : reducers.especialidadesReducer,
   historiasClinicas : reducers.historiasClinicasReducer,
+  evolucionesPrescripciones : reducers.evolucionesPrescripcionesReducer,
   //FORM REDUCER
   form : formReducer
 })

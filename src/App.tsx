@@ -32,13 +32,19 @@ import DeleteEspecialidad from "../pages/Especialidades/DeleteEspecialidad"
       import HistoriasClinicas from '../pages/historiasClinicas'
       import CreateHistoriaClinica from "../pages/HistoriasClinicas/CreateHistoriaClinica"
       import EditHistoriaClinica from "../pages/HistoriasClinicas/EditHistoriaClinica"
-      import DeleteHistoriasClinica from "../pages/HistoriasClinicas/DeleteHistoriaClinica"
+      import DeleteHistoriaClinica from "../pages/HistoriasClinicas/DeleteHistoriaClinica"
     //FIN HISTORIAS CLINICAS
+    
+      //INICIO EVOLUCIONES PRESCRIPCIONES
+        import EvolucionesPrescripciones from '../pages/evolucionesPrescripciones'
+        import CreateEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/CreateEvolucionPrescripcion"
+        import EditEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/EditEvolucionPrescripcion"
+        import DeleteEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/DeleteEvolucionPrescripcion"
+      //FIN EVOLCUIONES PRESCRIPCIONES
   //FIN DOCUMENTOS
   
 import ProtectedRoutes from './ProtectedRoutes'
 import ReadEspecialidadesList from '../pages/Especialidades/ReadEspecialidadesList';
-import DeleteHistoriaClinica from '../pages/HistoriasClinicas/DeleteHistoriaClinica';
 function App() {
   return (
     <>
@@ -84,6 +90,14 @@ function App() {
                   <Route path="new" element={<CreateHistoriaClinica/>}/>
                   <Route path='edit' element={<EditHistoriaClinica/>}/>
                   <Route path="delete" element={<DeleteHistoriaClinica/>}/>
+                </Route>
+                {/* FIN SECCION DE PROFESIONALES  */}
+                
+                {/* SECCION DE EVOLUCIONES PRESCRIPCIONES  */}
+                <Route path="/evoluciones-prescripciones/*" element={<EvolucionesPrescripciones/>}>
+                  <Route path="new" element={<CreateEvolucionPrescripcion/>}/>
+                  <Route path='edit' element={<EditEvolucionPrescripcion/>}/>
+                  <Route path="delete" element={<DeleteEvolucionPrescripcion/>}/>
                 </Route>
                 {/* FIN SECCION DE PROFESIONALES  */}
           </Route>

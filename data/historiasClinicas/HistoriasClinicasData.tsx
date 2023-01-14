@@ -1,35 +1,5 @@
 export const HistoriasClinicasData = [
     {
-        name : "primer_nombre",
-        type : 'text',
-        nombre : 'primer_nombre'
-    },
-    {
-        name : "segundo_nombre",
-        type : 'text',
-        nombre : 'segundo_nombre'
-    },
-    {
-        name : "apellido_paterno",
-        type : 'text',
-        nombre : 'apellido_paterno'
-    },
-    {
-        name : "apellido_materno",
-        type : 'text',
-        nombre : 'apellido_materno'
-    },
-    {
-        name : "cedula_identidad",
-        type : 'text',
-        nombre : 'cedula_identidad'
-    },
-    {
-        name : "fecha_nacimiento",
-        type : 'text',
-        nombre : 'fecha_nacimiento'
-    },
-    {
         name : "codigo",
         type : 'text',
         nombre : 'codigo'
@@ -56,11 +26,6 @@ export const HistoriasClinicasData = [
     },
     
     {
-        name : "signos_vitales_antropometria_fecha_medicion",
-        type : 'text',
-        nombre : 'signos_vitales_antropometria_fecha_medicion'
-    },
-    {
         name : "signos_vitales_antropometria_temperatura",
         type : 'text',
         nombre : 'signos_vitales_antropometria_temperatura'
@@ -84,12 +49,6 @@ export const HistoriasClinicasData = [
         name : "signos_vitales_antropometria_talla",
         type : 'number',
         nombre : 'signos_vitales_antropometria_talla'
-    },
-    
-    {
-        name : "diagnostico",
-        type : 'text',
-        nombre : 'diagnostico'
     },
     {
         name : "planes_tratamiento",

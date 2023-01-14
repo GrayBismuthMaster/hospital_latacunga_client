@@ -72,46 +72,44 @@ export interface Especialidad {
 
 export interface TableHistoriasClinicas { 
     id: string
-    primer_nombre : string;
-    segundo_nombre : string;
-    apellido_paterno : string;
-    apellido_materno : string;
-    cedula_identidad : string;
-    fecha_nacimiento : Date;
     codigo : string;
     motivo_consulta : string;
     antecedentes_personales : string;
     antecedentes_familiares : string;
     enfermedad_actual : string;
-    revision_actual_organos_sistemas : string;
-    revision_actual_organos_sistemas_sentidos : string;
-    revision_actual_organos_sistemas_respiratorio : string;
-    revision_actual_organos_sistemas_cardiovascular : string;
-    revision_actual_organos_sistemas_digestivo : string;
-    revision_actual_organos_sistemas_dental : string;
-    revision_actual_organos_sistemas_urinario : string;
-    revision_actual_organos_sistemas_musculo_esqueletico : string;
-    revision_actual_organos_sistemas_endocrinico : string;
-    revision_actual_organos_sistemas_hemo_linfaticos : string;
-    revision_actual_organos_sistemas_nervioso : string;
+    revision_actual_organos_sistemas : Array<TablaCPSP>;
     signos_vitales_antropometria_fecha_medicion : Date;
     signos_vitales_antropometria_temperatura : Number;
     signos_vitales_antropometria_presion_arterial : string;
     signos_vitales_antropometria_pulso : string;
     signos_vitales_antropometria_peso : Number;
     signos_vitales_antropometria_talla : Number;
-    examen_fisico_regional_cabeza : string;
-    examen_fisico_regional_cuello : string;
-    examen_fisico_regional_torax : string;
-    examen_fisico_regional_abdomen : string;
-    examen_fisico_regional_pelvis : string;
-    examen_fisico_regional_extremidades : string;
+    examen_fisico_regional : Array<TablaCPSP>;
     diagnostico : Array<Diagnostico>;
     planes_tratamiento : string;
     firma : string;
+    usuario_historia_clinica : TableUsers
+    profesional_historia_clinica : TableProfesionales
 }
 export interface Diagnostico {
-    cie10 : string;
-    presuntivo : boolean;
-    definitivo : boolean;
+    cie : string;
+    pre : boolean;
+    def : boolean;
+    descripcion : string;
+}
+export interface TablaCPSP {
+    name : string 
+    value : string 
+    key : string
+    SP : boolean
+    CP : boolean 
+    descripcion ?: string 
+}
+
+export interface TableEvolucionesPrescripciones {
+    id : string,
+    num_hoja : string,
+    historia_clinica_id : TableHistoriasClinicas,
+    id_usuario_evolucion_prescripcion : TableUsers,
+    id_consultorio_evolucion_prescripcion : Consultorio
 }

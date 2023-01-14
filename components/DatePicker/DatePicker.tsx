@@ -17,7 +17,7 @@ export const DatePickerField = ({ ...props }:any) => {
       isClearable
       showYearDropdown
       scrollableMonthYearDropdown
-      placeholderText="Fecha de Nacimiento"
+      placeholderText={field.name}
     />
   );
 };

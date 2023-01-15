@@ -13,12 +13,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from '@mui/icons-material/Info';
 import {  green, yellow, red, blue } from '@mui/material/colors';
-import styles from "../../styles/tables/tables.module.css";
+import styles from "../../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
 
-import { fetchEvolucionesPrescripcionesByHistoriaClinicaId } from "../../redux/actions/evolucionesPrescripciones";
+import { fetchDetallesEvolucionesPrescripcionesByEvolucionPrescripcionId } from "../../../redux/actions/detallesEvolucionesPrescripciones";
 import { useLocation, useNavigate } from "react-router-dom";
-import {TableEvolucionesPrescripciones} from '../../interfaces'
+import {TableDetallesEvolucionesPrescripciones} from '../../../interfaces'
 import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
   table: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   }
 });
 
-const ReadEvolucionesPrescripcionesList = (props:any) => {
+const ReadDetallesEvolucionesPrescripcionesList = (props:any) => {
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,19 +34,19 @@ const ReadEvolucionesPrescripcionesList = (props:any) => {
   const [rows, setRows] = useState([])
   // const [keys, setKeys] = useState([])
 useEffect(()=>{
-  console.log('props desde evoluciones',location)
-  props.fetchEvolucionesPrescripcionesByHistoriaClinicaId((location as any).state.datosFila.historia_clinica_id);
+  console.log('props desde evoluciones',(location as any).state.datosFila.id_evolucion_prescripcion)
+  props.fetchDetallesEvolucionesPrescripcionesByEvolucionPrescripcionId((location as any).state.datosFila.id_evolucion_prescripcion);
   console.log('evolcuones prescripciones', props)
 },[])
 
   useEffect(() => {
       
-      setRows(props.evolucionesPrescripciones);
+      setRows(props.detallesEvolucionesPrescripciones);
       setDidLoad(true)
     return () => {
       
     }
-  },[didLoad ,JSON.stringify(props.evolucionesPrescripciones)])
+  },[didLoad ,JSON.stringify(props.detallesEvolucionesPrescripciones)])
 
   useEffect(()=>{
     return ()=>{
@@ -59,7 +59,7 @@ useEffect(()=>{
   const classes = useStyles();
 
   const requestSearch = (searchedVal:any) => {
-    const filteredRows = props.evolucionesPrescripciones.filter((row:any) => {
+    const filteredRows = props.detallesEvolucionesPrescripciones.filter((row:any) => {
       return row.nombre.toLowerCase().includes(searchedVal.toLowerCase());
     });
     setRows(filteredRows);
@@ -79,9 +79,7 @@ useEffect(()=>{
     console.log(props.currentTarget.id)
     navigate('delete', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
   }
-  const detalleEvolucionPrescripcionRow = (props : any)=>{
-    navigate('details', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}}) 
-  }
+  
   // return(
     //   <SearchingTable rows = {rows} keys = {keys}/>
     // )
@@ -122,8 +120,6 @@ useEffect(()=>{
                 {
                         props.keys.filter(
                           (elemento:any) => elemento !== 'fecha_actual' 
-                            && 
-                          elemento !=='revision_actual_organos_sistemas'
                             &&
                           elemento !=='id'
                             &&
@@ -131,17 +127,7 @@ useEffect(()=>{
                             &&
                           elemento !=='updatedAt'
                           &&
-                          elemento !=='id_usuario_evolucion_prescripcion'
-                          &&
-                          elemento !=='id_consultorio_evolucion_prescripcion'
-                          &&
-                          elemento !=='historia_clinica_id'
-                          &&
-                          elemento !=='id_profesional_historia_clinica'
-                          &&
-                          elemento !=='especialidad_historia_clinica'
-                          &&
-                          elemento !=='id_usuario_historia_clinica'
+                          elemento !=='id_evolucion_prescripcion'
                             ).map((key:any)=>{
                             return (
                               <TableCell key={key}>{key.replace(/_/gi,' ').toUpperCase()}</TableCell>
@@ -156,20 +142,20 @@ useEffect(()=>{
               
             {
               //RECORRIDO DE VALORES POR OBJETO
-              Object.values(rows).map((valor:TableEvolucionesPrescripciones, index)=>{
+              Object.values(rows).map((valor:TableDetallesEvolucionesPrescripciones, index)=>{
                 return (
                   <TableRow key={index} >
-                     <TableCell align="right">{valor.num_hoja}</TableCell>
-                     <TableCell align="right">{valor.consultorio_evolucion_prescripcion.nombre_consultorio}</TableCell>
-                     <TableCell align="right">{valor.historia_clinica_evolucion_prescripcion.codigo}</TableCell>
-                     <TableCell align="right">{valor.usuario_evolucion_prescripcion.primer_nombre}</TableCell>
+                     <TableCell align="right">{valor.evolucion}</TableCell>
+                     <TableCell align="right">{valor.medicamentos}</TableCell>
+                     <TableCell align="right">{valor.prescripciones}</TableCell>
+                     <TableCell align="right">{valor.evolucion_prescripcion.num_hoja}</TableCell>
                      
                      <TableCell align="right" > 
                       <InfoIcon 
                           id={
                             JSON.stringify(
                               {
-                                id_evolucion_prescripcion : valor.id, 
+                                id : valor.id, 
                               }
                             )
                           } 
@@ -181,7 +167,7 @@ useEffect(()=>{
                           className={styles.icon} 
                           onClick={
                             (props)=>{
-                              detalleEvolucionPrescripcionRow(props)
+                              editRow(props)
                               }}
                         />
                         <EditIcon 
@@ -208,7 +194,8 @@ useEffect(()=>{
                         id={
                           JSON.stringify(
                             {
-                              id : valor.id
+                              id : valor.id,
+                              nombre : valor.evolucion_prescripcion.num_hoja
                             }
                           )
                         } 
@@ -242,28 +229,28 @@ useEffect(()=>{
 }
 
 const mapStateToProps = (state : any) => {
-  const { evolucionesPrescripciones } = state;
+  const { detallesEvolucionesPrescripciones } = state;
   //AUTOMATIZACION DE ROWS DE TABLAS
 
     //ACCEDER A LOS NOMBRES DE LAS COLUMNAS
     //CREAMOS UNA VARIABLE GLOBAL PARA EL POSTERIOR ALMACENAMIENTO DE CLAVES
     let keys = {};
       //LE DAMOS BREAK PARA QUE SOLO OBTENGA LOS NOMBRES DE LAS COLUMNAS DE LA PRIMERA FILA
-      for(const evolucionPrescripcion in evolucionesPrescripciones){
-        keys = Object.keys(evolucionesPrescripciones[evolucionPrescripcion]);
+      for(const detalleEvolucionPrescripcion in detallesEvolucionesPrescripciones){
+        keys = Object.keys(detallesEvolucionesPrescripciones[detalleEvolucionPrescripcion]);
         break;
       }
     //FIN ACCEDER A LOS NOMBRES DE LAS COLUMNAS
     //OBTENEMOS LOS NOMBRES DE LAS COLUMNAS YA QUE ESTA GUARDADO EN UN ARRAY
-      const evolucionPrescripcionKeys = Object.values(keys);
+      const detalleEvolucionPrescripcionKeys = Object.values(keys);
   //FIN AUTOMATIZACION DE ROWS DE TABLAS
   return {
-    evolucionesPrescripciones : Object.values(evolucionesPrescripciones),
-    keys : evolucionPrescripcionKeys
+    detallesEvolucionesPrescripciones : Object.values(detallesEvolucionesPrescripciones),
+    keys : detalleEvolucionPrescripcionKeys
   }
 }
 
 export default connect(
   mapStateToProps,
-  {fetchEvolucionesPrescripcionesByHistoriaClinicaId}
-)(ReadEvolucionesPrescripcionesList);
+  {fetchDetallesEvolucionesPrescripcionesByEvolucionPrescripcionId}
+)(ReadDetallesEvolucionesPrescripcionesList);

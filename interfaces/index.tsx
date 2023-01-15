@@ -109,7 +109,15 @@ export interface TablaCPSP {
 export interface TableEvolucionesPrescripciones {
     id : string,
     num_hoja : string,
-    historia_clinica_id : TableHistoriasClinicas,
-    id_usuario_evolucion_prescripcion : TableUsers,
-    id_consultorio_evolucion_prescripcion : Consultorio
+    historia_clinica_evolucion_prescripcion : TableHistoriasClinicas,
+    usuario_evolucion_prescripcion : TableUsers,
+    consultorio_evolucion_prescripcion : Consultorio
+}
+export interface TableDetallesEvolucionesPrescripciones {
+    id : string;
+    evolucion : string
+    prescripciones : string
+    medicamentos : string
+    id_evolucion_prescripcion : string
+    evolucion_prescripcion : TableEvolucionesPrescripciones
 }

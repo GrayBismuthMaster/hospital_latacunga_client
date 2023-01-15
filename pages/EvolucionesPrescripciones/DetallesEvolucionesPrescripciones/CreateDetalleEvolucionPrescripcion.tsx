@@ -1,31 +1,26 @@
 import { useState, useRef, useEffect} from 'react';
-import styles from './evolucionPrescripcionStyles/index.module.css';
+import styles from './detalleEvolucionPrescripcionStyles/index.module.css';
 import { Toaster} from 'react-hot-toast'
-import Modal from '../../components/Modal/Modal';
+import Modal from '../../../components/Modal/Modal';
 import {connect} from 'react-redux'
-import {evolucionesPrescripciones} from '../../redux/actions'
+import {detallesEvolucionesPrescripciones} from '../../../redux/actions'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import notificationStyles from '../../../../styles/divNotifications/divNotifications.module.css'
-import {useS3Upload} from '../../hooks/useS3Upload';
-import HospitalLatacungaApi from '../../apis/HospitalLatacungaApi';
-import {DatePickerField} from '../../components/DatePicker/DatePicker'
+import HospitalLatacungaApi from '../../../apis/HospitalLatacungaApi';
+import {DatePickerField} from '../../../components/DatePicker/DatePicker'
 
-//Componentes
-import {Diagnostico} from '../../components/Diagnostico/Diagnostico';
+import { DetallesEvolucionesPrescripcionesData } from '../../../data/detallesEvolucionesPrescripciones/DetallesEvolucionesPrescripcionesData';
 
-import { EvolucionesPrescripcionesData } from '../../data/evolucionesPrescripciones/EvolucionesPrescripcionesData';
-
-import { FieldFormik } from '../../components/FormikFields/FieldFormik';
+import { FieldFormik } from '../../../components/FormikFields/FieldFormik';
 import { Dropdown } from 'semantic-ui-react';
-import { TableUsers } from '../../interfaces';
+import { TableUsers } from '../../../interfaces';
 //SELECT 
 import Select from 'react-select'
 
 //Redux form
-const createEvolucionPrescripcion = evolucionesPrescripciones.createEvolucionPrescripcion;
+const createDetalleEvolucionPrescripcion = detallesEvolucionesPrescripciones.createDetalleEvolucionPrescripcion;
 
-const CreateEvolucionPrescripcion = (props : any) => {
+const CreateDetalleEvolucionPrescripcion = (props : any) => {
     
     //FIN CUSTOM HOOK
     const componentRef = useRef();
@@ -45,30 +40,28 @@ const CreateEvolucionPrescripcion = (props : any) => {
         <>
             <Formik
                 initialValues={{
-                    num_hoja:"",
                 }}
                 onSubmit = {async (values, {resetForm})=>{
                     //LA IMAGEN Y EL ESTADO ENVIO
                     console.log('valores del form',values);
                     console.log('valores del state', location.state)
 
-                    // let id_especialidad_historia_clinica = (location as any).state.datosFila.id;
-                    const {historia_clinica_id, usuario_historia_clinica, consultorio_historia_clinica}  = (location as any).state.datosFila;
-                    await props.createEvolucionPrescripcion({ ... values, historia_clinica_id, id_usuario_evolucion_prescripcion :  usuario_historia_clinica.id,  id_consultorio_evolucion_prescripcion : consultorio_historia_clinica  });
-                    // resetForm();
+                    const {id_evolucion_prescripcion, }  = (location as any).state.datosFila;
+                    await props.createDetalleEvolucionPrescripcion({ ... values, id_evolucion_prescripcion });
+                    resetForm();
                 }}
             >
                 {
                     ({handleSubmit, values, setFieldValue})=>
                     (
                        
-                        <Modal forwardRef={componentRef} title = {'Crear EvolucionPrescripcion'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
+                        <Modal forwardRef={componentRef} title = {'Crear Detalle Evolucion Prescripcion'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
                             <Form  className={styles.form} onSubmit={handleSubmit}>
                                 <div  className={styles.form_container_left_right}>    
                                     <div className={styles.form_container}>
                                         
                                         {
-                                            EvolucionesPrescripcionesData.map((valores:any, index : number)=>{
+                                            DetallesEvolucionesPrescripcionesData.map((valores:any, index : number)=>{
                                                 return (
                                                     <FieldFormik
                                                         key = {index}
@@ -93,8 +86,8 @@ const CreateEvolucionPrescripcion = (props : any) => {
 
 export default connect(
     null,
-    {  createEvolucionPrescripcion}
-)(CreateEvolucionPrescripcion)
+    {  createDetalleEvolucionPrescripcion}
+)(CreateDetalleEvolucionPrescripcion)
 // export default connect(
 //     null,
 //     {createEvolucionPrescripcion}

@@ -5,4 +5,5 @@ import * as consultorios from './consultorios'
 import * as especialidades from './especialidades'
 import * as historiasClinicas from './historiasClinicas'
 import * as evolucionesPrescripciones from './evolucionesPrescripciones'
-export {users, auth, profesionales, consultorios, especialidades, historiasClinicas, evolucionesPrescripciones};
+import * as detallesEvolucionesPrescripciones from './detallesEvolucionesPrescripciones'
+export {users, auth, profesionales, consultorios, especialidades, historiasClinicas, evolucionesPrescripciones, detallesEvolucionesPrescripciones};

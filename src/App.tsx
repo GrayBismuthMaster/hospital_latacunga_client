@@ -40,7 +40,13 @@ import DeleteEspecialidad from "../pages/Especialidades/DeleteEspecialidad"
         import CreateEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/CreateEvolucionPrescripcion"
         import EditEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/EditEvolucionPrescripcion"
         import DeleteEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/DeleteEvolucionPrescripcion"
-      //FIN EVOLCUIONES PRESCRIPCIONES
+      //FIN EVOLUCIONES PRESCRIPCIONES
+        //INICIO DETALLE EVOLUCIONES PRESCRIPCIONES
+          import DetallesEvolucionesPrescripciones from '../pages/detallesEvolucionesPrescripciones'
+          import CreateDetalleEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/DetallesEvolucionesPrescripciones/CreateDetalleEvolucionPrescripcion"
+          import EditDetalleEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/DetallesEvolucionesPrescripciones/EditDetalleEvolucionPrescripcion"
+          import DeleteDetalleEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/DetallesEvolucionesPrescripciones/DeleteDetalleEvolucionPrescripcion"
+        //FIN DETALLE EVOLUCIONES PRESCRIPCIONES
   //FIN DOCUMENTOS
   
 import ProtectedRoutes from './ProtectedRoutes'
@@ -98,6 +104,13 @@ function App() {
                   <Route path="new" element={<CreateEvolucionPrescripcion/>}/>
                   <Route path='edit' element={<EditEvolucionPrescripcion/>}/>
                   <Route path="delete" element={<DeleteEvolucionPrescripcion/>}/>
+                  
+                    <Route path="details/*" element={<DetallesEvolucionesPrescripciones/>}>
+                      <Route path="new" element={<CreateDetalleEvolucionPrescripcion/>}/>
+                      <Route path='edit' element={<EditDetalleEvolucionPrescripcion/>}/>
+                      <Route path="delete" element={<DeleteDetalleEvolucionPrescripcion/>}/>
+                    </Route>
+                  
                 </Route>
                 {/* FIN SECCION DE PROFESIONALES  */}
           </Route>

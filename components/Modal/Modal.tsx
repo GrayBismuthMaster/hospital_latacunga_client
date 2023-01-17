@@ -3,16 +3,13 @@ import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 import {useLocation, Link} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-// These two containers are siblings in the DOM
-const appRootEl = document.getElementById('root');
-
 interface Props {
   title : string;
   image : string;
   children : ReactNode
 }
 
-const Modal : any = ({children, title, image}:any) => {
+const Modal : any = ({children, title, image}:Props) => {
   // console.log(location.state.pathname)
   useEffect(() => {
     console.log("ENtre al")
@@ -25,7 +22,7 @@ const Modal : any = ({children, title, image}:any) => {
           <section id='modalSection' className={styles.modal}>
               <div className={styles.modal_container}>
                 <div className={styles.containerExitButton}>
-                  <Link to={"modified"} className = {styles.exitButton}>
+                  <Link to={"/especialidades"} className = {styles.exitButton}>
                     <CloseIcon/>
                   </Link>
                 </div>

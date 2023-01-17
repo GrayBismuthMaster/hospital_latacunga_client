@@ -27,12 +27,21 @@ import CreateEspecialidad from "../pages/Especialidades/CreateEspecialidad"
 import EditEspecialidad from "../pages/Especialidades/EditEspecialidad"
 import DeleteEspecialidad from "../pages/Especialidades/DeleteEspecialidad"
 //FIN ESPECIALIDADES
+
+//INICIO RESERVAS DE CITAS
+import ReservasCitas from '../pages/reservasCitas'
+import CreateReservaCita from "../pages/ReservasCitas/CreateReservaCitas"
+// import EditEspecialidad from "../pages/Especialidades/EditEspecialidad"
+// import DeleteEspecialidad from "../pages/Especialidades/DeleteEspecialidad"
+//FIN RESERVAS DE CITAS
+
   //INICIO DOCUMENTOS
     //INICIO HISTORIAS CLINICAS
       import HistoriasClinicas from '../pages/historiasClinicas'
       import CreateHistoriaClinica from "../pages/HistoriasClinicas/CreateHistoriaClinica"
       import EditHistoriaClinica from "../pages/HistoriasClinicas/EditHistoriaClinica"
       import DeleteHistoriaClinica from "../pages/HistoriasClinicas/DeleteHistoriaClinica"
+      import ReporteHistoriaClinica from '../pages/HistoriasClinicas/reportes/ReporteHistoriaClinicaById'
     //FIN HISTORIAS CLINICAS
     
       //INICIO EVOLUCIONES PRESCRIPCIONES
@@ -91,28 +100,35 @@ function App() {
                   <Route path="delete" element={<DeleteProfesional/>}/>
                 </Route>
                 {/* FIN SECCION DE PROFESIONALES  */}
-                {/* SECCION DE PROFESIONALES  */}
+                {/* SECCION DE HISTORIAS CLINICAS  */}
                 <Route path="/historias-clinicas/*" element={<HistoriasClinicas/>}>
                   <Route path="new" element={<CreateHistoriaClinica/>}/>
                   <Route path='edit' element={<EditHistoriaClinica/>}/>
                   <Route path="delete" element={<DeleteHistoriaClinica/>}/>
+                  <Route path="reporte" element={<ReporteHistoriaClinica/>}/>
                 </Route>
-                {/* FIN SECCION DE PROFESIONALES  */}
+                {/* FIN SECCION DE HISTORIAS CLINICAS  */}
                 
                 {/* SECCION DE EVOLUCIONES PRESCRIPCIONES  */}
                 <Route path="/evoluciones-prescripciones/*" element={<EvolucionesPrescripciones/>}>
                   <Route path="new" element={<CreateEvolucionPrescripcion/>}/>
                   <Route path='edit' element={<EditEvolucionPrescripcion/>}/>
                   <Route path="delete" element={<DeleteEvolucionPrescripcion/>}/>
-                  
                     <Route path="details/*" element={<DetallesEvolucionesPrescripciones/>}>
                       <Route path="new" element={<CreateDetalleEvolucionPrescripcion/>}/>
                       <Route path='edit' element={<EditDetalleEvolucionPrescripcion/>}/>
                       <Route path="delete" element={<DeleteDetalleEvolucionPrescripcion/>}/>
                     </Route>
-                  
                 </Route>
                 {/* FIN SECCION DE PROFESIONALES  */}
+                
+                {/* SECCION DE RESERVAS DE CITAS  */}
+                <Route path="/reservas-citas/*" element={<ReservasCitas/>}>
+                  <Route path="new" element={<CreateReservaCita/>}/>
+                  {/* <Route path='edit' element={<EditReservaCita/>}/> */}
+                  {/* <Route path="delete" element={<DeleteReservaCita/>}/> */}
+                </Route>
+                {/* FIN SECCION DE RESERVAS DE CITAS */}
           </Route>
         </Routes>
       </Router>

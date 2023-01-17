@@ -1,5 +1,5 @@
 export interface TableUsers{
-    id : string;​
+    id : string;
     primer_nombre : string;
     segundo_nombre : string;
     apellido_paterno : string;
@@ -24,7 +24,7 @@ export interface Rol {
     nombreRol : string
 }
 export interface TableProfesionales{
-    id : string;​
+    id : string
     nombre_profesional: string
     apellido_profesional: string
     cedula_profesional: string
@@ -33,7 +33,7 @@ export interface TableProfesionales{
     correo_profesional: string
     imagen_profesional: string
     estado_profesional: boolean
-    especialidad : Especialidad
+    especialidad_id : Especialidad
 }
 
 export interface TableConsultorios{
@@ -54,20 +54,21 @@ export interface TableEspecialidades {
 }
 
 export interface Consultorio {
-    id : Number
-    nombre_consultorio : string
-    direccion_consultorio : string
-    imagen_consultorio : string;
-    descripcion_consultorio : string;
-    horario_atencion_consultorio : string
-    estado_consultorio : boolean
-    createdAt : string
-    updatedAt : string
+    id? : Number
+    nombre_consultorio ?: string
+    direccion_consultorio ?: string
+    imagen_consultorio ?: string;
+    descripcion_consultorio ?: string;
+    horario_atencion_consultorio ?: string
+    estado_consultorio ?: boolean
+    createdAt ?: string
+    updatedAt ?: string
 }
 export interface Especialidad {
     id:string
     nombre_especialidad:string
     estado_especialidad:boolean
+    consultorio_id : string
 }
 
 export interface TableHistoriasClinicas { 
@@ -120,4 +121,20 @@ export interface TableDetallesEvolucionesPrescripciones {
     medicamentos : string
     id_evolucion_prescripcion : string
     evolucion_prescripcion : TableEvolucionesPrescripciones
+}
+export interface ReservaCita {
+    id:string;
+    motivo_reserva:string;
+    fecha_hora_inicio_reserva:Date;
+    fecha_hora_fin_reserva:Date;
+    estado_reserva:EstadoReserva;
+}
+export enum EstadoReserva {
+    COMPLETADO="ACEPTADO",
+    PENDIENTE="PENDIENTE",
+    CANCELADO="CANCELADO"
+}
+export enum Roles {
+    admin=1, 
+    user=2
 }

@@ -6,3 +6,4 @@ export {especialidadesReducer} from './especialidadesReducer';
 export {historiasClinicasReducer} from './historiasClinicasReducer';
 export {evolucionesPrescripcionesReducer} from './evolucionesPrescripcionesReducer';
 export {detallesEvolucionesPrescripcionesReducer} from './detallesEvolucionesPrescripcionesReducer';
+export {reservasCitasReducer} from './reservasCitasReducer';

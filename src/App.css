@@ -5,4 +5,5 @@
     flex: 5;
     background-color: #6060600a;
     padding:1% 10%;
+    overflow: auto;
 }

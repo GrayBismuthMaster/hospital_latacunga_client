@@ -3,11 +3,11 @@ import {NavLink} from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
-import MedicationIcon from '@mui/icons-material/Medication';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import HistoryIcon from '@mui/icons-material/History';
 import {connect} from 'react-redux'
 
@@ -42,8 +42,16 @@ const Sidebar = (props:any) => {
                                 <NavLink className={activo}  to='/home'>Home</NavLink>
                             </li>
                             <li className={styles.sidebar_list_item}>
-                                <HistoryEduIcon className={styles.sideBarIcon}/>
-                                <NavLink className={activo}  to='/grades'>Calificaciones</NavLink>
+                                <AccountCircleIcon className={styles.sideBarIcon}/>
+                                <NavLink className={activo}  to='/profile'>Perfil</NavLink>
+                            </li>
+                            <li className={styles.sidebar_list_item}>
+                                <AnalyticsIcon className={styles.sideBarIcon}/>
+                                <NavLink className={activo}  to='/statistics'>Estadísticas</NavLink>
+                            </li>
+                            <li className={styles.sidebar_list_item}>
+                                <InsertInvitationIcon className={styles.sideBarIcon}/>
+                                <NavLink className={activo} to='/reservas-citas'>Reserva de Citas</NavLink>
                             </li>
                         </ul>
                         
@@ -96,11 +104,15 @@ const Sidebar = (props:any) => {
                                 <HistoryIcon className={styles.sideBarIcon}/>
                                 <NavLink className={activo}  to='/especialidades'>Historias Clínicas</NavLink>
                             </li>
+                        </ul>
+                        <h1 className={styles.sidebar_title}>
+                            Reserva de Citas
+                        </h1>
+                        <ul className={styles.sidebar_list}>
                             <li className={styles.sidebar_list_item}>
-                                <PersonIcon className={styles.sideBarIcon}/>
-                                <NavLink className={activo} to='/users'>Usuarios</NavLink>
+                                <InsertInvitationIcon className={styles.sideBarIcon}/>
+                                <NavLink className={activo}  to='/reservas-citas'>Reserva de Citas</NavLink>
                             </li>
-                            
                         </ul>
                     </div>
                 </div>
@@ -111,10 +123,11 @@ const Sidebar = (props:any) => {
 }
 
 const mapStateToProps = (state:any) =>{
+    console.log('state desde sidebar', state)
     if(state.auth.userData!==null)
     {
         return {
-            rol : state.auth.userData.ROL
+            rol : state.auth.userData.datosUsuario.role.nombreRol
         }
     }else{
         return {

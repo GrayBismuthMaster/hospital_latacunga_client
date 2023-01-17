@@ -1,13 +1,9 @@
 import toast from 'react-hot-toast'
 import HospitalLatacungaApi from "../../apis/HospitalLatacungaApi";
 
-export const fetchConsultorio = (user:any) => async (dispatch:any) =>{
-    if(!user){
-        return null;
-    }
-    const response = await HospitalLatacungaApi.get(`/consultorios/${user._id}`);
+export const fetchConsultorio = (id:any) => async (dispatch:any) =>{
+    const response = await HospitalLatacungaApi.get(`/consultorios/${id}`);
     dispatch({type: 'FETCH_CONSULTORIO', payload: response.data});    
-    
 };
 export const fetchConsultorios = () => async (dispatch:any) =>{
     const response = await HospitalLatacungaApi.get(`/consultorios/`);

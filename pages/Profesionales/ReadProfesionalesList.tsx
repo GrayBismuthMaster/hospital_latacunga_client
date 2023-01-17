@@ -36,6 +36,7 @@ const ReadProfesionalesList = (props:any) => {
   // const [keys, setKeys] = useState([])
 useEffect(()=>{
   props.fetchProfesionalesByEspecialidadId((location as any).state.datosFila.id);
+  console.log('Profesionales',props.profesionales)
 },[])
 
   useEffect(() => {

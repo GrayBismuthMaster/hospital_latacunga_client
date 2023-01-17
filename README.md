@@ -2,5 +2,12 @@ OBSERVACIONES A TENER EN CUENTA
 GENERAR ROL CON ID 1 DE ADMIN Y 2 DE USER (Esto mientras se linkea los roles en create user Module)
 
 createHistoriaClinica tiene el rol en constante como 2 para usuarios, lo ideal es obtener el rol por nombre compararlo y enviar id
+createReserva cita lo mismo
 
 SOLO LOS NOMBRES DE ASOCIACIONES DE HISTORIA CLINICA ESTAN NOMBRADAS POR LO TANTO CABE LA REMOTA POSIBILIDAD DE QUE AL INSTALAR EN OTRA MAQUINA SE DEN OTROS NOMBRES DE ASOCIACION Y DE ERRORES
+
+---------------------------------------
+ES NECESARIA LA BUSQUEDA POR COINCIDENCIA DE USUARIO EN CREATE RESERVA CITA Y LA PAGINACION U OPTIMIZACION DE USUARIOS 
+
+------------------------------------
+PUEDE DARSE EL CASO DE QUE UN CONSULTORIO TENGA LA CITA A LA MISMA HORA EL MISMO DIA ... SOLUCIONAR ESO 

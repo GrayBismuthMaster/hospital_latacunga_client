@@ -4,6 +4,8 @@ import _ from 'lodash';
 //En el reducer obtengo la acción y el estado
 export const consultoriosReducer = (state = {}, action:any) =>{
     switch(action.type){
+        case 'FETCH_CONSULTORIO' : 
+            return {...state, [action.payload.id] : action.payload};
         case 'FETCH_CONSULTORIOS':
             return { ...state, ..._.mapKeys(action.payload, 'id')};
         case 'CREATE_CONSULTORIO':

@@ -15,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MedicationIcon from '@mui/icons-material/Medication';
-
+import ArticleIcon from '@mui/icons-material/Article'
 import {  green, yellow, red, blue } from '@mui/material/colors';
 import styles from "../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
@@ -84,6 +84,9 @@ useEffect(()=>{
   const evolucionPrescripcionRow = (props: any)=>{
     console.log(props.currentTarget.id)
     navigate('/evoluciones-prescripciones', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
+  }
+  const reporteHistoriaClinicaById = (props : any)=>{
+    navigate('reporte', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
   }
   // return(
     //   <SearchingTable rows = {rows} keys = {keys}/>
@@ -189,6 +192,22 @@ useEffect(()=>{
                      <TableCell align="right">{valor.planes_tratamiento}</TableCell>
                      
                      <TableCell align="right" > 
+                      <ArticleIcon 
+                        id={
+                          JSON.stringify(
+                            {
+                              historia_clinica : valor, 
+                              consultorio_historia_clinica : (location as any).state.datosFila.id_consultorio
+                             }
+                          )
+                        } 
+                        sx={{ color: blue[300] }} 
+                        className={styles.icon}
+                        onClick={
+                          (props)=>{
+                            reporteHistoriaClinicaById(props)
+                        }}
+                      />
                       <MedicationIcon 
                           id={
                             JSON.stringify(

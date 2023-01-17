@@ -6,9 +6,6 @@ import {connect} from 'react-redux'
 import {historiasClinicas} from '../../redux/actions'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import notificationStyles from '../../../../styles/divNotifications/divNotifications.module.css'
-import {useS3Upload} from '../../hooks/useS3Upload';
-import HospitalLatacungaApi from '../../apis/HospitalLatacungaApi';
 import {DatePickerField} from '../../components/DatePicker/DatePicker'
 
 //Componentes
@@ -32,46 +29,19 @@ const createHistoriaClinica = historiasClinicas.createHistoriaClinica;
 
 const CreateHistoriaClinica = (props : any) => {
     
-    //CUSTOM HOOK PARA S3 UPLOAD
-        const { s3State, setS3State, formatFilename, uploadToS3} = useS3Upload();
-    //FIN CUSTOM HOOK
-    const navigate = useNavigate();
     const componentRef = useRef();
     //create ref to store the modal
     const location = useLocation();
-    const [fileName, setFileName] = useState('');
-    //RENDERIZACION IMAGENES
-        const renderImageField = (formikProps:any)=>{
-            return (
-            <>
-                <input id='file' type="file" className={styles.input_photo} onChange={(e)=>singleFileChangedHandler(e, formikProps)}/>
-                <label htmlFor="file" className={styles.input_photo_btn} >Subir</label>
-            </>      
-            )
-        }
-                                                
-        
-        const singleFileChangedHandler = ( e:any, formikProps : any ) => {
-            // console.log(event.target.files[0]);
-            // setSelectedFile(event.target.files[0]);
-            console.log('props de formik',formikProps);
-            setFileName(e.target.files[0].name);
-            setS3State({...s3State, file : e.target.files[0], name : e.target.files[0].name});
-            formikProps.form.setFieldValue('imagen', e.target.files[0])
-            // input.onChange(e.target.files[0])
-            
-        }; 
-    //FIN RENDERIZACION IMAGENES METODOS
     //DROPDOWN SELECTED
     const [dropdownSelectedValue, setDropdownSelectedValue] = useState("");
     const [dropdownUserSelectedValue, setDropdownUserSelectedValue] = useState("");
     //MULTISELECT STATE
-    const [selectState, setSelectState] = useState({
+    const [selectState, setSelectState] = useState<any>({
         revisionActual : [],
         examenFisico : []
     })
-    const [fieldDiagnostico, setFieldDiagnostico] = useState([]);
-    const [diagnostico, setDiagnostico] = useState([]);
+    const [fieldDiagnostico, setFieldDiagnostico] = useState<any>([]);
+    const [diagnostico, setDiagnostico] = useState<any>([]);
 
     useEffect(() => {
         
@@ -206,7 +176,7 @@ const CreateHistoriaClinica = (props : any) => {
                                         />
                                         {/* GENERAR EL VALOR EN CP O SP Y LA DESCRIPCION SI ES QUE EXISTE */}
                                         {
-                                            selectState.revisionActual.map((revision:any, index)=>{
+                                            selectState.revisionActual.map((revision:any, index:any)=>{
                                                 console.log(index)
 
                                                 return (
@@ -234,7 +204,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                             (valor)=>{
                                                                                 setSelectState({
                                                                                     ...selectState, 
-                                                                                    revisionActual : selectState.revisionActual.map((revisado):any=>(revisado as any).key===revision.key ? {...(revisado as any), CP : valor.target.value ==="on" ? true : false, SP : false } : revisado)
+                                                                                    revisionActual : selectState.revisionActual.map((revisado:any)=>(revisado as any).key===revision.key ? {...(revisado as any), CP : valor.target.value ==="on" ? true : false, SP : false } : revisado)
                                                                                 })
                                                                         }}
                                                                     />
@@ -246,7 +216,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                             (valor)=>{
                                                                                 setSelectState({
                                                                                     ...selectState, 
-                                                                                    revisionActual : selectState.revisionActual.map((revisado):any=>(revisado as any).key===revision.key ? {...(revisado as any), SP : valor.target.value ==="on" ?? true , CP : false } : revisado)
+                                                                                    revisionActual : selectState.revisionActual.map((revisado:any)=>(revisado as any).key===revision.key ? {...(revisado as any), SP : valor.target.value ==="on" ?? true , CP : false } : revisado)
                                                                                 })
                                                                         }}
                                                                     />
@@ -254,7 +224,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                             {/* FIN HORIZONTAL CP SP  */}
                                                             {/* DESCRIPCION CP  */}
                                                                 {
-                                                                    selectState.revisionActual.map((revisado):any =>(revisado as any).key ===revision.key && revision.CP === true
+                                                                    selectState.revisionActual.map((revisado:any) =>(revisado as any).key ===revision.key && revision.CP === true
                                                                         ?
                                                                     <div
                                                                         style={{
@@ -269,7 +239,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                                     
                                                                                     setSelectState({
                                                                                         ...selectState,
-                                                                                        revisionActual : selectState.revisionActual.map((revisado):any =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any) })
+                                                                                        revisionActual : selectState.revisionActual.map((revisado:any) =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any) })
                                                                                     })
                                                                                 }
                                                                                 
@@ -315,7 +285,7 @@ const CreateHistoriaClinica = (props : any) => {
                                         />
                                         {/* GENERAR EL VALOR EN CP O SP Y LA DESCRIPCION SI ES QUE EXISTE */}
                                         {
-                                            selectState.examenFisico.map((revision:any, index)=>{
+                                            selectState.examenFisico.map((revision:any, index:any)=>{
                                                 console.log(index)
 
                                                 return (
@@ -343,7 +313,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                             (valor)=>{
                                                                                 setSelectState({
                                                                                     ...selectState, 
-                                                                                    examenFisico : selectState.examenFisico.map((revisado):any=>(revisado as any).key===revision.key ? {...(revisado as any), CP : valor.target.value ==="on" ? true : false, SP : false } : revisado)
+                                                                                    examenFisico : selectState.examenFisico.map((revisado:any)=>(revisado as any).key===revision.key ? {...(revisado as any), CP : valor.target.value ==="on" ? true : false, SP : false } : revisado)
                                                                                 })
                                                                         }}
                                                                     />
@@ -355,7 +325,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                             (valor)=>{
                                                                                 setSelectState({
                                                                                     ...selectState, 
-                                                                                    examenFisico : selectState.examenFisico.map((revisado):any=>(revisado as any).key===revision.key ? {...(revisado as any), SP : valor.target.value ==="on" ?? true , CP : false } : revisado)
+                                                                                    examenFisico : selectState.examenFisico.map((revisado:any)=>(revisado as any).key===revision.key ? {...(revisado as any), SP : valor.target.value ==="on" ?? true , CP : false } : revisado)
                                                                                 })
                                                                         }}
                                                                     />
@@ -363,7 +333,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                             {/* FIN HORIZONTAL CP SP  */}
                                                             {/* DESCRIPCION CP  */}
                                                                 {
-                                                                    selectState.examenFisico.map((revisado):any =>(revisado as any).key ===revision.key && revision.CP === true
+                                                                    selectState.examenFisico.map((revisado:any )=>(revisado as any).key ===revision.key && revision.CP === true
                                                                         ?
                                                                     <div
                                                                         style={{
@@ -378,7 +348,7 @@ const CreateHistoriaClinica = (props : any) => {
                                                                                     
                                                                                     setSelectState({
                                                                                         ...selectState,
-                                                                                        examenFisico : selectState.examenFisico.map((revisado):any =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any) })
+                                                                                        examenFisico : selectState.examenFisico.map((revisado:any) =>(revisado as any).key === revision.key ? {...(revisado as any), Descripcion : valor.target.value  } : {...(revisado as any) })
                                                                                     })
                                                                                 }
                                                                                 
@@ -482,7 +452,3 @@ export default connect(
     mapStateToProps,
     { fetchProfesionalesByEspecialidadId,fetchUsersByRole, createHistoriaClinica}
 )(CreateHistoriaClinica)
-// export default connect(
-//     null,
-//     {createHistoriaClinica}
-// )(CreateHistoriaClinica)

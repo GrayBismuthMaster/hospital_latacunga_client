@@ -42,6 +42,7 @@ const ReporteHistoriaClinicaById = (props:any) => {
               imagen_consultorio={props.consultorios[0].imagen_consultorio}
               nombre_consultorio={props.consultorios[0].nombre_consultorio}
               direccion_consultorio={props.consultorios[0].direccion_consultorio}
+              tipo_documento = {'HISTORIA CLINICA'}
             />
             {/* DIV PARA EL CONTENIDO 90% */}
               <View style={{

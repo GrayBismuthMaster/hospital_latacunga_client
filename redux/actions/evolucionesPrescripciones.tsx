@@ -1,11 +1,8 @@
 import toast from 'react-hot-toast'
 import HospitalLatacungaApi from "../../apis/HospitalLatacungaApi";
 
-export const fetchEvolucionPrescripcion = (user:any) => async (dispatch:any) =>{
-    if(!user){
-        return null;
-    }
-    const response = await HospitalLatacungaApi.get(`/evolucionesPrescripciones/${user._id}`);
+export const fetchEvolucionPrescripcion = (id:any) => async (dispatch:any) =>{
+    const response = await HospitalLatacungaApi.get(`/evolucionesPrescripciones/${id}`);
     dispatch({type: 'FETCH_EVOLUCION_PRESCRIPCION', payload: response.data});    
     
 };

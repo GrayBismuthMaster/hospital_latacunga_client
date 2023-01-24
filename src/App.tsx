@@ -49,6 +49,7 @@ import CreateReservaCita from "../pages/ReservasCitas/CreateReservaCitas"
         import CreateEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/CreateEvolucionPrescripcion"
         import EditEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/EditEvolucionPrescripcion"
         import DeleteEvolucionPrescripcion from "../pages/EvolucionesPrescripciones/DeleteEvolucionPrescripcion"
+        import ReporteEvolucionPrescripcion from '../pages/EvolucionesPrescripciones/reportes/ReporteEvolucionPrescripcionById'
       //FIN EVOLUCIONES PRESCRIPCIONES
         //INICIO DETALLE EVOLUCIONES PRESCRIPCIONES
           import DetallesEvolucionesPrescripciones from '../pages/detallesEvolucionesPrescripciones'
@@ -114,6 +115,8 @@ function App() {
                   <Route path="new" element={<CreateEvolucionPrescripcion/>}/>
                   <Route path='edit' element={<EditEvolucionPrescripcion/>}/>
                   <Route path="delete" element={<DeleteEvolucionPrescripcion/>}/>
+                  <Route path="reporte" element={<ReporteEvolucionPrescripcion/>}/>
+                  
                     <Route path="details/*" element={<DetallesEvolucionesPrescripciones/>}>
                       <Route path="new" element={<CreateDetalleEvolucionPrescripcion/>}/>
                       <Route path='edit' element={<EditDetalleEvolucionPrescripcion/>}/>

@@ -32,6 +32,7 @@ const ReadConsultoriosList = (props:any) => {
   // const [keys, setKeys] = useState([])
 useEffect(()=>{
   props.fetchConsultorios();
+  console.log(props.consultorios)
 },[])
 
   useEffect(() => {
@@ -129,6 +130,7 @@ useEffect(()=>{
                 return (
                   <TableRow key={index} >
                      <TableCell align="right">{valor.nombre_consultorio}</TableCell>
+                     <TableCell align="right">{valor.descripcion_consultorio}</TableCell>
                      <TableCell align="right">{valor.direccion_consultorio}</TableCell>
                      <TableCell align="right">{valor.horario_atencion_consultorio}</TableCell>
                      <TableCell align="right">{valor.estado_consultorio ? 'activo' : 'inactivo'}</TableCell>
@@ -141,6 +143,7 @@ useEffect(()=>{
                                 id : valor.id, 
                                 nombre_consultorio : valor.nombre_consultorio,
                                 direccion_consultorio : valor.direccion_consultorio,
+                                descripcion_consultorio : valor.descripcion_consultorio,
                                 horario_atencion_consultorio : valor.horario_atencion_consultorio,
                                 estado_consultorio : valor.estado_consultorio,
                               }

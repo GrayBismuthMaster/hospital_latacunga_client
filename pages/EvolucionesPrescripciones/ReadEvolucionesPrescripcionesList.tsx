@@ -15,7 +15,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import {  green, yellow, red, blue } from '@mui/material/colors';
 import styles from "../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
-
+import ArticleIcon from '@mui/icons-material/Article';
 import { fetchEvolucionesPrescripcionesByHistoriaClinicaId } from "../../redux/actions/evolucionesPrescripciones";
 import { useLocation, useNavigate } from "react-router-dom";
 import {TableEvolucionesPrescripciones} from '../../interfaces'
@@ -81,6 +81,9 @@ useEffect(()=>{
   }
   const detalleEvolucionPrescripcionRow = (props : any)=>{
     navigate('details', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}}) 
+  }
+  const reporteEvolucionPrescripcionById = (props : any)=>{
+    navigate('reporte', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}}) 
   }
   // return(
     //   <SearchingTable rows = {rows} keys = {keys}/>
@@ -165,6 +168,24 @@ useEffect(()=>{
                      <TableCell align="right">{valor.usuario_evolucion_prescripcion.primer_nombre}</TableCell>
                      
                      <TableCell align="right" > 
+                     <ArticleIcon 
+                        id={
+                          JSON.stringify(
+                            {
+                              evolucion_prescripcion : valor, 
+                              consultorio_evolucion_prescripcion : (location as any).state.datosFila.consultorio_historia_clinica,
+                              usuario_evolucion_prescripcion : (location as any).state.datosFila.usuario_historia_clinica,
+                              historia_clinica_evolucion_prescripcion : valor.historia_clinica_evolucion_prescripcion
+                            }
+                          )
+                        } 
+                        sx={{ color: blue[300] }} 
+                        className={styles.icon}
+                        onClick={
+                          (props)=>{
+                            reporteEvolucionPrescripcionById(props)
+                        }}
+                      />
                       <InfoIcon 
                           id={
                             JSON.stringify(

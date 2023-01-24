@@ -1,7 +1,7 @@
 
 import {PDFViewer, Document, Page, Text, View,Image} from '@react-pdf/renderer';
 import { Consultorio } from '../../interfaces';
-export const HeaderReporte = ({imagen_consultorio, nombre_consultorio, direccion_consultorio}:Consultorio)=>{
+export const HeaderReporte = ({tipo_documento, imagen_consultorio, nombre_consultorio, direccion_consultorio}:any)=>{
     return(
         <>
             {/* DIV PARA EL ENCABEZADO HORIZONTAL  */}
@@ -84,7 +84,7 @@ export const HeaderReporte = ({imagen_consultorio, nombre_consultorio, direccion
 
                     }}
                     >
-                    HISTORIA CLINICA
+                        {tipo_documento}
                     </Text>
                 </View>
                 {/* FIN HEADER  */}

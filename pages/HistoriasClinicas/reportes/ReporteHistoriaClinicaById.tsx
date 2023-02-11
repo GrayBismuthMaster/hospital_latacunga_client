@@ -109,8 +109,9 @@ const ReporteHistoriaClinicaById = (props:any) => {
                             borderColor : 'black',
                             borderWidth : 1,
                             padding : 1,
-                            paddingLeft : 10
-                            // backgroundColor : 'rgba(255,255,255,0.2)'
+                            paddingLeft : 10,
+                            backgroundColor : 'rgba(2, 9, 74,0.9)',
+                            color : 'rgba(255,255,255,0.9)'
                           }}
                         >
                           {
@@ -171,7 +172,6 @@ const ReporteHistoriaClinicaById = (props:any) => {
                             borderWidth : 1,
                             padding : 2,
                             paddingLeft : 10
-                            // backgroundColor : 'rgba(0,0,0,0.2)'
                           }}
                         >
                           {
@@ -250,8 +250,9 @@ const ReporteHistoriaClinicaById = (props:any) => {
                             borderColor : 'rgba(0,0,0,0.1)',
                             borderWidth : 1,
                             padding : 1,
-                            paddingLeft : 10
-                            // backgroundColor : 'rgba(255,255,255,0.2)'
+                            paddingLeft : 10,
+                            backgroundColor : 'rgba(2, 9, 74,0.9)',
+                            color : 'rgba(255,255,255,0.9)'
                           }}
                         >
                           {
@@ -267,7 +268,9 @@ const ReporteHistoriaClinicaById = (props:any) => {
                           borderColor : 'rgba(0,0,0,0.1)',
                           borderWidth : 1,
                           padding : 1,
-                          paddingLeft : 10
+                          paddingLeft : 10,
+                          backgroundColor : 'rgba(2, 9, 74,0.9)',
+                          color : 'rgba(255,255,255,0.9)'
                         }}
                       >
                         MÉDICO
@@ -278,7 +281,9 @@ const ReporteHistoriaClinicaById = (props:any) => {
                           borderColor : 'rgba(0,0,0,0.1)',
                           borderWidth : 1,
                           padding : 1,
-                          paddingLeft : 10
+                          paddingLeft : 10,
+                          backgroundColor : 'rgba(2, 9, 74,0.9)',
+                          color : 'rgba(255,255,255,0.9)'
                         }}
                       >
                         ESPECIALIDAD
@@ -289,7 +294,9 @@ const ReporteHistoriaClinicaById = (props:any) => {
                           borderColor : 'rgba(0,0,0,0.1)',
                           borderWidth : 1,
                           padding : 1,
-                          paddingLeft : 10
+                          paddingLeft : 10,
+                          backgroundColor : 'rgba(2, 9, 74,0.9)',
+                          color : 'rgba(255,255,255,0.9)'
                         }}
                       >
                         CODIGO
@@ -356,7 +363,6 @@ const ReporteHistoriaClinicaById = (props:any) => {
                               borderWidth : 1,
                               padding : 1,
                               paddingLeft : 10
-                              // backgroundColor : 'rgba(0,0,0,0.2)'
                             }}
                           >
                             {
@@ -416,7 +422,7 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     height : '4%',
                     width : '100%',
                     // backgroundColor : 'blue',
-                    fontSize : 8,
+                    fontSize : 8
                   }}
               >
                 <View
@@ -426,7 +432,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text>
@@ -465,7 +472,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text>
@@ -504,7 +512,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text>
@@ -543,7 +552,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text>
@@ -584,7 +594,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text
@@ -649,7 +660,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text>
@@ -738,7 +750,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text
@@ -812,7 +825,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text
@@ -902,7 +916,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   <Text
@@ -954,7 +969,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   FECHA : {new Date(historia_clinica.createdAt).toLocaleDateString()}
@@ -965,8 +981,7 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderColor : 'rgba(0,0,0,0.1)',
                     borderWidth : 1,
                     padding : 1,
-                    paddingLeft : 10,
-                    // backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    paddingLeft : 10
                   }}
                 >
                   HORA : {new Date(historia_clinica.createdAt).toLocaleTimeString()}
@@ -979,7 +994,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   NOMBRE DEL PROFESIONAL : {`${historia_clinica.profesional_historia_clinica.nombre_profesional} ${historia_clinica.profesional_historia_clinica.apellido_profesional}`}
@@ -1003,7 +1019,8 @@ const ReporteHistoriaClinicaById = (props:any) => {
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74,0.9)',
+                    color : 'rgba(255,255,255,0.9)'
                   }}
                 >
                   FIRMA : 

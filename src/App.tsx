@@ -27,7 +27,7 @@ import CreateEspecialidad from "../pages/Especialidades/CreateEspecialidad"
 import EditEspecialidad from "../pages/Especialidades/EditEspecialidad"
 import DeleteEspecialidad from "../pages/Especialidades/DeleteEspecialidad"
 //FIN ESPECIALIDADES
-
+import Profile from '../pages/Profile/Profile'
 //INICIO RESERVAS DE CITAS
 import ReservasCitas from '../pages/reservasCitas'
 import CreateReservaCita from "../pages/ReservasCitas/CreateReservaCitas"
@@ -71,6 +71,7 @@ function App() {
               {/* PRIVATE ROUTES */}
           <Route element={<ProtectedRoutes/>}>  
                 <Route path="/home" element={<Home/>}/>
+                <Route path="/profile" element={<Profile/>}/>
                 {/* SECCION DE USUARIOS  */}
                 <Route path="/users/*" element={<Users/>}>
                   <Route path="new" element={<CreateUser/>}/>

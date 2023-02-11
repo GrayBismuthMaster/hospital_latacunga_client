@@ -48,7 +48,7 @@ const Navbar = (props:any)=> {
                             <span className={styles.navBarIconBadge}>5</span>
                    </div>
                    <li className={styles.navBarIconContainerList}>
-                        <img src={props.googleUserData ? props.googleUserData.image: props.userData.imagen} alt="Imagen de perfil" className={styles.imgUsuario}></img>
+                        <img src={props.userData.datosUsuario.imagen} alt="Imagen de perfil" className={styles.imgUsuario}></img>
                         <ul className={styles.itemsImgUsuario}>
                             <li><a onClick={tocado}>Ver Perfil</a></li>
                             <li><a onClick={cerrarSesion}>Cerrar Sesión</a></li>

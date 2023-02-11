@@ -75,13 +75,14 @@ export const HeaderReporte = ({tipo_documento, imagen_consultorio, nombre_consul
                     borderWidth : 1,
                     padding : 1,
                     paddingLeft : 10,
-                    backgroundColor : 'rgba(255, 179, 179, 0.8)'
+                    backgroundColor : 'rgba(2, 9, 74, 0.9)',
+            
                     }}
                 >
                     <Text
                     style={{
                         fontSize : 20,
-
+                        color : 'rgba(255,255,255,0.9)'
                     }}
                     >
                         {tipo_documento}

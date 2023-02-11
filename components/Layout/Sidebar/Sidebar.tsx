@@ -45,10 +45,10 @@ const Sidebar = (props:any) => {
                                 <AccountCircleIcon className={styles.sideBarIcon}/>
                                 <NavLink className={activo}  to='/profile'>Perfil</NavLink>
                             </li>
-                            <li className={styles.sidebar_list_item}>
+                            {/* <li className={styles.sidebar_list_item}>
                                 <AnalyticsIcon className={styles.sideBarIcon}/>
                                 <NavLink className={activo}  to='/statistics'>Estadísticas</NavLink>
-                            </li>
+                            </li> */}
                             <li className={styles.sidebar_list_item}>
                                 <InsertInvitationIcon className={styles.sideBarIcon}/>
                                 <NavLink className={activo} to='/reservas-citas'>Reserva de Citas</NavLink>

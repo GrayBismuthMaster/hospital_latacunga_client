@@ -148,7 +148,7 @@ useEffect(()=>{
                      <TableCell align="right">{valor.direccion_profesional}</TableCell>
                      <TableCell align="right">{valor.correo_profesional}</TableCell>
                      <TableCell align="right">{valor.estado_profesional ? 'activo' : 'inactivo'}</TableCell>
-                     <TableCell align="right">{valor.especialidad.nombre_especialidad}</TableCell>
+                     <TableCell align="right">{valor.especialidad_id.nombre_especialidad}</TableCell>
                      
                      <TableCell align="right" > 
                         <EditIcon 

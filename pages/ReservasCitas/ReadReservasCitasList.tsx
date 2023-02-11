@@ -167,7 +167,7 @@ const ReservasCitasList =(props : any) =>{
                         }}
                         onSelectSlot={handleSelect}
                         eventPropGetter ={
-                            (event, start, end, isSelected) => {
+                            (event:any) => {
                               let newStyle = {
                                 color: 'black',
                                 borderRadius: "10px",
@@ -230,7 +230,7 @@ const ReservasCitasList =(props : any) =>{
                     
                     onSelectSlot={handleSelect}
                     eventPropGetter={
-                        (event, start, end, isSelected) => {
+                        (event : any) => {
                           let newStyle = {
                             backgroundColor: "lightgrey",
                             color: 'black',
@@ -247,10 +247,10 @@ const ReservasCitasList =(props : any) =>{
                           };
                     
                           
-                        if (event.estado === "ACEPTADO"){
+                        if ((event as any).estado === "ACEPTADO"){
                             newStyle.backgroundColor = "#138934b9";
                             newStyle.color = "white"
-                        } else if(event.estado === "PENDIENTE"){
+                        } else if((event as any).estado === "PENDIENTE"){
                             newStyle.backgroundColor = "#ffc107b9";
                             newStyle.color = "white"
                         }

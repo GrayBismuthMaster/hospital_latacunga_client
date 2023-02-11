@@ -160,6 +160,7 @@ useEffect(()=>{
             {
               //RECORRIDO DE VALORES POR OBJETO
               Object.values(rows).map((valor:TableEvolucionesPrescripciones, index)=>{
+                console.log('valores recibidos en evoluciones',valor)
                 return (
                   <TableRow key={index} >
                      <TableCell align="right">{valor.num_hoja}</TableCell>

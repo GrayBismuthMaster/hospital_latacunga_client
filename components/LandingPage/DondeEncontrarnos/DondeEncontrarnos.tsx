@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DondeEncontrarnos.module.css";
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import EmailIcon from '@mui/icons-material/Email';
-import { Link } from "react-router-dom";
+import HospitalLatacungaApi from "../../../apis/HospitalLatacungaApi";
+import axios from "axios";
 const DondeEncontrarnos = () => {
+    const [state, setState] = useState({
+        nombre : '',
+        email : '',
+        mensaje : ''
+    }); 
+    useEffect(() => {
+        console.log(state);
+      return () => {
+        
+      };
+    }, [state])
     return (
         <section id="Contacto" className={styles.contacto_container}>
             <div className={styles.contacto_container_left}/>
@@ -12,12 +22,33 @@ const DondeEncontrarnos = () => {
                     <div className={styles.form}>
                         <h3 className={styles.form_title}>Nuestra Ubicación </h3>
                         <h3>Latacunga</h3>
-                        <h3 className={styles.contactoLabels}>Escríbenos</h3>
-                        <h3><LocalPhoneIcon/> 098 306 5968</h3>
-                        <h3><EmailIcon/> cmed@hotmail.com</h3>
-                        <h3>Dirección</h3>
-                        <h3>Avenida La Coruña E12-35 e, Av. Isabel la Católica, Quito 170525</h3>
-
+                        <h3 className={styles.contactoLabels}>Agende una cita</h3>
+                        <h3>Nombre</h3>
+                        <input
+                            type='text'
+                            onChange={(e)=>setState({...state, nombre : e.target.value})}
+                        />
+                        <h3>Email</h3>
+                        <input
+                            type='text'
+                            onChange={(e)=>setState({...state, email : e.target.value})}
+                        />
+                        <h3>Mensaje</h3>
+                        <input
+                            type='text'
+                            onChange={(e)=>setState({...state, mensaje : e.target.value})}
+                        />
+                        <button
+                            onClick={async ()=>{
+                                const {nombre, email, mensaje} = state;
+                                const resp = await HospitalLatacungaApi.post('/emails', {
+                                    email, 
+                                    nombre, 
+                                    mensaje
+                                });
+                                console.log(resp);
+                            }}
+                        >Enviar</button>
                     </div>
                 </div>
             </div>

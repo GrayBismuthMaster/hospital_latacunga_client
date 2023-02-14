@@ -1,6 +1,7 @@
 import './App.css'
 //Index pages
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landpage from '../pages/landpage';
 import Login from "../pages/login";
 import Home from "../pages/home";
 //INCIO USERS
@@ -67,7 +68,10 @@ function App() {
       <Router> 
               {/* PUBLIC ROUTES */}
         <Routes>
-          <Route path="/" element={<Login />}/>
+          
+          <Route path="/" element={<Landpage />}/>
+          <Route path="/login" element={<Login />}/>
+          
               {/* PRIVATE ROUTES */}
           <Route element={<ProtectedRoutes/>}>  
                 <Route path="/home" element={<Home/>}/>

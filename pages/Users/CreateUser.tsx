@@ -65,21 +65,6 @@ const CreateUser = (props : any) => {
                         telefono : ''
                     }
                 }
-                // validate = {(values)=>{
-                //     let errores = {nombre_usuario : '', telefono : '', correo : '', usuario : '', password : ''};
-                //     if(!values.nombre_usuario){
-                //         errores.nombre_usuario =   'Ingresa un nombre pelao';
-                //     }else if(!/^[0-9\s]{1,10}$/.test(values.telefono)){
-                //         errores.telefono = "Por favor ingrese un num telefonico";
-                //     }else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.correo)){
-                //         errores.correo =  "Por favor ingrese un correo electrónico válido"
-                //     }else if(!values.usuario){
-                //         errores.usuario = "Por favor ingrese un usuario"
-                //     }else if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(values.password)){
-                //         errores.password = "La contraseña debe tener mínimo 8 caracteres, máximo 15, al menos una letra mayúscula, una minúscula, un dígito, sin espacios en blanco,1 caracter especial";
-                //     }
-                //     return errores;
-                //  }}
                 onSubmit = {(values, {resetForm})=>{
                     console.log('valores del form',values);
                     console.log((values as any).imagen.type)
@@ -93,7 +78,7 @@ const CreateUser = (props : any) => {
                         console.log("RESPUESTA DE S3", resUpload, "URL", url);
                         await props.createUser({ ... values, imagen : url, estado : true});
                     })
-                    // resetForm();
+                    resetForm();
                 }}
             >
                 {

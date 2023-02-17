@@ -5,8 +5,9 @@
   justify-content: center;
   align-items: center;
   /* background-color: #f31010; */
-  background-image: url("../../../assets/BannerCmed.jpg");
+  background-image: url("../../../assets/bannerLandingPageCmed.jpg");
   background-repeat: no-repeat;
+  background-position: 0%;
   background-size: cover;
 }   
 .Banner{
@@ -16,17 +17,19 @@
     display: block; 
     position: relative;
     font-family: 'IBM Plex Sans', sans-serif;
-    color: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.9);
 }
 .Informacion{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width:40%;
     height: 52vh;
     padding-top: 2%;
     text-align: center;
     justify-content: center;
     font-size: xx-large;
+    background-color: rgba(255,255,255,0.9);
+
 }
 .Beneficios{
     width: 100%; 
@@ -36,6 +39,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    padding-top: 20%;
 }
 .ItemBeneficios{
     display: flex;

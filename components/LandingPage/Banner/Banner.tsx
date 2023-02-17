@@ -10,10 +10,10 @@ const Banner = () => {
     return(
         <section className = {styles.BannerContainer}>
             <div id="Banner" className = {styles.Banner}>
-                    <div className={styles.Informacion}>
+                    {/* <div className={styles.Informacion}>
                         <h1>CMED</h1>
                         <h3>Clínica de especialidades</h3>
-                    </div>
+                    </div> */}
                 <div id= "Beneficios" className= {styles.Beneficios}>
                     <div className = {styles.ItemBeneficios}>
                         <img alt={"Medicación"} src={Medication} className={styles.imgBeneficios}></img>

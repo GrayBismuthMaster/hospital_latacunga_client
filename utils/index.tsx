@@ -13,3 +13,10 @@ export const calcularEdad = (fecha:Date)=> {
 export const formatTitle = (keys:any)=>{
     return keys.replace(/_/gi,' ').toUpperCase();
 }
+
+export const popUrl = (url : string)=>{
+    let locationSplit = url.split('/');
+    locationSplit.pop();
+    let locationSplitJoin = locationSplit.join('/');
+    return locationSplitJoin;
+}

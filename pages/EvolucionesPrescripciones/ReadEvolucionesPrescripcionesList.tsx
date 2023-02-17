@@ -17,7 +17,7 @@ import styles from "../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
 import ArticleIcon from '@mui/icons-material/Article';
 import { fetchEvolucionesPrescripcionesByHistoriaClinicaId } from "../../redux/actions/evolucionesPrescripciones";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {TableEvolucionesPrescripciones} from '../../interfaces'
 import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
@@ -32,10 +32,11 @@ const ReadEvolucionesPrescripcionesList = (props:any) => {
   const location = useLocation();
   const [didLoad, setDidLoad] = useState(false);
   const [rows, setRows] = useState([])
-  // const [keys, setKeys] = useState([])
+  
+  let { id_historia_clinica, id_consultorio, id_usuario_historia_clinica } = useParams(); 
 useEffect(()=>{
   console.log('props desde evoluciones',location)
-  props.fetchEvolucionesPrescripcionesByHistoriaClinicaId((location as any).state.datosFila.historia_clinica_id);
+  props.fetchEvolucionesPrescripcionesByHistoriaClinicaId(id_historia_clinica);
   console.log('evolcuones prescripciones', props)
 },[])
 
@@ -80,7 +81,10 @@ useEffect(()=>{
     navigate('delete', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
   }
   const detalleEvolucionPrescripcionRow = (props : any)=>{
-    navigate('details', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}}) 
+    //PASAR ID EVOLUCION PRESCRIPCION
+    let datosFila = JSON.parse(props.currentTarget.id);
+    let {id_evolucion_prescripcion} = datosFila; 
+    navigate(`details/${id_evolucion_prescripcion}`, {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}}) 
   }
   const reporteEvolucionPrescripcionById = (props : any)=>{
     navigate('reporte', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}}) 
@@ -174,8 +178,8 @@ useEffect(()=>{
                           JSON.stringify(
                             {
                               evolucion_prescripcion : valor, 
-                              consultorio_evolucion_prescripcion : (location as any).state.datosFila.consultorio_historia_clinica,
-                              usuario_evolucion_prescripcion : (location as any).state.datosFila.usuario_historia_clinica,
+                              consultorio_evolucion_prescripcion : id_consultorio,
+                              usuario_evolucion_prescripcion : id_usuario_historia_clinica,
                               historia_clinica_evolucion_prescripcion : valor.historia_clinica_evolucion_prescripcion
                             }
                           )

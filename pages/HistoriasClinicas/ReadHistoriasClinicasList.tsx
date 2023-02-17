@@ -21,7 +21,7 @@ import styles from "../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
 
 import { fetchHistoriasClinicasByEspecialidadId } from "../../redux/actions/historiasClinicas";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {TableHistoriasClinicas} from '../../interfaces'
 import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
@@ -36,10 +36,13 @@ const ReadHistoriasClinicasList = (props:any) => {
   const location = useLocation();
   const [didLoad, setDidLoad] = useState(false);
   const [rows, setRows] = useState([])
-  // const [keys, setKeys] = useState([])
+  
+  let { id, id_consultorio } = useParams(); 
+
 useEffect(()=>{
-  console.log('prop de consultorio',location)
-  props.fetchHistoriasClinicasByEspecialidadId((location as any).state.datosFila.id);
+  console.log('prop de especialidad',id)
+  console.log('recibo consultoiro', id_consultorio)
+  props.fetchHistoriasClinicasByEspecialidadId(id);
 },[])
 
   useEffect(() => {
@@ -83,7 +86,12 @@ useEffect(()=>{
   }
   const evolucionPrescripcionRow = (props: any)=>{
     console.log(props.currentTarget.id)
-    navigate('/evoluciones-prescripciones', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
+    //MANDAR CONSULTORIO E HISTORIA CLINICA
+    let propsFila = JSON.parse(props.currentTarget.id);
+    let id_historia_clinica = propsFila.historia_clinica_id;
+    let id_usuario_historia_clinica = propsFila.usuario_historia_clinica.id;
+    
+    navigate(`/evoluciones-prescripciones/${id_historia_clinica}/${id_consultorio}/${id_usuario_historia_clinica}`, {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
   }
   const reporteHistoriaClinicaById = (props : any)=>{
     navigate('reporte', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
@@ -98,7 +106,7 @@ useEffect(()=>{
       <NavLink  
         to='new'
         className = {styles.createButton}
-        state={location.state}
+        // state={location.state}
         style={{
           display : 'flex',
           textDecoration : 'none',
@@ -197,7 +205,7 @@ useEffect(()=>{
                           JSON.stringify(
                             {
                               historia_clinica : valor, 
-                              consultorio_historia_clinica : (location as any).state.datosFila.id_consultorio
+                              consultorio_historia_clinica : id_consultorio
                              }
                           )
                         } 
@@ -214,7 +222,7 @@ useEffect(()=>{
                               {
                                 historia_clinica_id : valor.id, 
                                 usuario_historia_clinica : valor.usuario_historia_clinica,
-                                consultorio_historia_clinica : (location as any).state.datosFila.id_consultorio
+                                consultorio_historia_clinica : id_consultorio
                               }
                             )
                           } 

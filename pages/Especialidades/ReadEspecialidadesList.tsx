@@ -19,7 +19,7 @@ import {  green, yellow, red, blue } from '@mui/material/colors';
 import styles from "../../styles/tables/tables.module.css";
 
 import { fetchEspecialidadesByConsultorioId } from "../../redux/actions/especialidades";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import {TableEspecialidades} from '../../interfaces'
 import { Link } from "react-router-dom";
 import FaceIcon from '@mui/icons-material/Face';
@@ -36,10 +36,10 @@ const ReadEspecialidadesList = (props:any) => {
   const location = useLocation();
   const [didLoad, setDidLoad] = useState(false);
   const [rows, setRows] = useState([])
-  
-  // const [keys, setKeys] = useState([])
+  //SOLUCION ID DE URL PARA ESPECIALIDADES
+  let { id } = useParams(); 
 useEffect(()=>{
-  props.fetchEspecialidadesByConsultorioId(location.state);
+  props.fetchEspecialidadesByConsultorioId(id);
 },[])
 
   useEffect(() => {
@@ -86,10 +86,14 @@ useEffect(()=>{
     navigate('delete', {state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}})
   }
   const profesionalRow = (props : any)=>{
-    navigate('/profesionales',{state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}});
+    let propsFila = JSON.parse(props.currentTarget.id);
+    let id_especialidad = propsFila.id;
+    navigate(`/profesionales/${id_especialidad}`,{state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}});
   }
   const historiaClinicaRow = (props : any)=>{
-    navigate('/historias-clinicas',{state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}});
+    let propsFila = JSON.parse(props.currentTarget.id);
+    let id_especialidad = propsFila.id;
+    navigate(`/historias-clinicas/${id_especialidad}/${id}`,{state : {datosFila: JSON.parse(props.currentTarget.id), pathname : location.pathname}});
   }
   // return(
     //   <SearchingTable rows = {rows} keys = {keys}/>
@@ -173,7 +177,7 @@ useEffect(()=>{
                             JSON.stringify(
                               {
                                 id : valor.id, 
-                                id_consultorio : location.state
+                                id_consultorio : location.state 
                               }
                             )
                           } 

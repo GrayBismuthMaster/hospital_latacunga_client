@@ -4,7 +4,7 @@ import { Toaster} from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal';
 import {connect} from 'react-redux'
 import {historiasClinicas} from '../../redux/actions'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import {DatePickerField} from '../../components/DatePicker/DatePicker'
 
@@ -42,13 +42,13 @@ const CreateHistoriaClinica = (props : any) => {
     })
     const [fieldDiagnostico, setFieldDiagnostico] = useState<any>([]);
     const [diagnostico, setDiagnostico] = useState<any>([]);
-
+    
+    let { id, id_consultorio } = useParams(); 
     useEffect(() => {
-        
-        //PROP DE CONSULTORIO
-        console.log('objeto recibido de location', location.state)
-        props.fetchProfesionalesByEspecialidadId((location as any).state.datosFila.id)
-        console.log('profesionales',props.profesionales)
+        //ID E ID DE CONSULTORIO
+        console.log('RECIBIDO POR URL', id, id_consultorio)
+
+        props.fetchProfesionalesByEspecialidadId(id)
 
         props.fetchUsersByRole("2");
         console.log('usuarios clientes', props.users)
@@ -118,7 +118,7 @@ const CreateHistoriaClinica = (props : any) => {
                     console.log('valores diagnostico', diagnostico);
                     console.log('valores revision', selectState.revisionActual);
                     console.log('valores examen fisiico', selectState.examenFisico)
-                    let id_especialidad_historia_clinica = (location as any).state.datosFila.id;
+                    let id_especialidad_historia_clinica = id;
                     
                     await props.createHistoriaClinica({ ... values, id_especialidad_historia_clinica ,diagnostico,examen_fisico_regional : selectState.examenFisico, revision_actual_organos_sistemas : selectState.revisionActual  });
                     // resetForm();

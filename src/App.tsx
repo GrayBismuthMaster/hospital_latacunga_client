@@ -92,7 +92,7 @@ function App() {
                 {/* FIN SECCION DE CONSULTORIOS  */}
                 {/* SECCION DE ESPECIALIDADES  */}
                 <Route path="/especialidades/*" element={<Especialidades/>}>
-                  <Route path="show/*" element={<ReadEspecialidadesList/>}>
+                  <Route path=":id/show/*" element={<ReadEspecialidadesList/>}>
                     <Route path="new" element={<CreateEspecialidad/>}/>
                     <Route path='edit' element={<EditEspecialidad/>}/>
                     <Route path="delete" element={<DeleteEspecialidad/>}/>
@@ -100,14 +100,14 @@ function App() {
                 </Route>
                 {/* FIN SECCION DE ESPECIALIDADES */}
                 {/* SECCION DE PROFESIONALES  */}
-                <Route path="/profesionales/*" element={<Profesionales/>}>
-                  <Route path="new" element={<CreateProfesional/>}/>
+                <Route path="/profesionales/:id/*" element={<Profesionales/>}>
+                  <Route path=":id/new" element={<CreateProfesional/>}/>
                   <Route path='edit' element={<EditProfesional/>}/>
                   <Route path="delete" element={<DeleteProfesional/>}/>
                 </Route>
                 {/* FIN SECCION DE PROFESIONALES  */}
                 {/* SECCION DE HISTORIAS CLINICAS  */}
-                <Route path="/historias-clinicas/*" element={<HistoriasClinicas/>}>
+                <Route path="/historias-clinicas/:id/:id_consultorio/*" element={<HistoriasClinicas/>}>
                   <Route path="new" element={<CreateHistoriaClinica/>}/>
                   <Route path='edit' element={<EditHistoriaClinica/>}/>
                   <Route path="delete" element={<DeleteHistoriaClinica/>}/>
@@ -116,13 +116,13 @@ function App() {
                 {/* FIN SECCION DE HISTORIAS CLINICAS  */}
                 
                 {/* SECCION DE EVOLUCIONES PRESCRIPCIONES  */}
-                <Route path="/evoluciones-prescripciones/*" element={<EvolucionesPrescripciones/>}>
+                <Route path="/evoluciones-prescripciones/:id_historia_clinica/:id_consultorio/:id_usuario_historia_clinica/*" element={<EvolucionesPrescripciones/>}>
                   <Route path="new" element={<CreateEvolucionPrescripcion/>}/>
                   <Route path='edit' element={<EditEvolucionPrescripcion/>}/>
                   <Route path="delete" element={<DeleteEvolucionPrescripcion/>}/>
                   <Route path="reporte" element={<ReporteEvolucionPrescripcion/>}/>
                   
-                    <Route path="details/*" element={<DetallesEvolucionesPrescripciones/>}>
+                    <Route path="details/:id_evolucion_prescripcion/*" element={<DetallesEvolucionesPrescripciones/>}>
                       <Route path="new" element={<CreateDetalleEvolucionPrescripcion/>}/>
                       <Route path='edit' element={<EditDetalleEvolucionPrescripcion/>}/>
                       <Route path="delete" element={<DeleteDetalleEvolucionPrescripcion/>}/>

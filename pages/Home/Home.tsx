@@ -1,34 +1,36 @@
 //Redux
 import styles from './Home.module.css';
+import styles2 from '../../styles/index.module.css';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import {Card} from '../../components/Card/Card';
+import {homeAdminData} from '../../data/home/homeAdminData';
 const Home =  ({nombre, rol}:any) =>{
 
     
-    if(rol === 'ADMINISTRADOR'){
+    if(rol === 'admin'){
         return(
             <div style = {{
+                display : 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginTop: '5%'
+                marginTop: '5%',
+                flexDirection : 'row'
             }}>
-                <div className= {styles.container}>
-                    <div className={styles.card}>
-                        <h2 className={styles.card_title}>Usuarios</h2>
-                        <ul 
-                            className={styles.card_list}
-                        >
-                            <Link to="/users">
-                                <img 
-                                    src = 'https://images.pexels.com/photos/2777898/pexels-photo-2777898.jpeg?cs=srgb&dl=pexels-ali-pazani-2777898.jpg&fm=jpg'
-                                    alt = 'Usuarios'
-                                    className = {styles.img}
-                                />
-                            </Link>
-                        </ul>
-                    </div>
+                <div className= {styles2.container_card}>
+                    {
+                        homeAdminData.map((home, index)=>(
+                            <Card
+                                title={home.title}
+                                alt ={home.alt}
+                                path = {home.path}
+                                source = {home.source}
+                                key = {index}
+                            />
+                        ))
+                    }
                     
-                </div>
+            </div>
                 
             </div>
         )
@@ -63,10 +65,12 @@ const Home =  ({nombre, rol}:any) =>{
 }
 
 const mapStateToProps = (state:any) =>{
-    
+    const {auth}= state;
+    console.log(`${auth.userData.datosUsuario.primer_nombre} ${auth.userData.datosUsuario.apellido_paterno}`);
+    console.log(auth.userData.datosUsuario.role.nombreRol);
         return {
-            nombre : state.auth.userData.NOMBRE_USER,
-            rol : state.auth.userData.ROL,
+            nombre : auth.userData.datosUsuario.role,
+            rol : auth.userData.datosUsuario.role.nombreRol,
         }
     
 }

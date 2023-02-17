@@ -1,16 +1,18 @@
 import React, { FC, ReactNode, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
-import {useLocation, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import { popUrl } from '../../utils';
 interface Props {
   title : string;
   image : string;
-  children : ReactNode
+  children : ReactNode;
 }
 
 const Modal : any = ({children, title, image}:Props) => {
-  // console.log(location.state.pathname)
+        const currentURL = window.location.pathname;
+        let lastUrl = popUrl(currentURL);
   useEffect(() => {
     console.log("ENtre al")
     return () => {
@@ -22,7 +24,7 @@ const Modal : any = ({children, title, image}:Props) => {
           <section id='modalSection' className={styles.modal}>
               <div className={styles.modal_container}>
                 <div className={styles.containerExitButton}>
-                  <Link to={"/especialidades"} className = {styles.exitButton}>
+                  <Link to={lastUrl} className = {styles.exitButton}>
                     <CloseIcon/>
                   </Link>
                 </div>

@@ -69,12 +69,13 @@ const Index = (props:any) => {
                                     {/* <div className='ui two buttons'> */}
                                    
                                             <Link  
-                                                to='show'
+                                                to={`${consultorio.id}/show`}
                                                 className = {styles.createButton}
                                                 style={{
                                                     color : 'white'
                                                 }}
                                                 state={consultorio.id}
+                                                
                                             >
                                                 <ArrowRightIcon style={{marginRight:'5%'}}/>
                                                     Continuar

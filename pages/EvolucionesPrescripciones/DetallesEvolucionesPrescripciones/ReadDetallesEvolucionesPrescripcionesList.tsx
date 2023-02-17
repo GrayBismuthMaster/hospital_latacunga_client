@@ -17,7 +17,7 @@ import styles from "../../../styles/tables/tables.module.css";
 import AddIcon from '@mui/icons-material/Add';
 
 import { fetchDetallesEvolucionesPrescripcionesByEvolucionPrescripcionId } from "../../../redux/actions/detallesEvolucionesPrescripciones";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {TableDetallesEvolucionesPrescripciones} from '../../../interfaces'
 import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
@@ -32,10 +32,11 @@ const ReadDetallesEvolucionesPrescripcionesList = (props:any) => {
   const location = useLocation();
   const [didLoad, setDidLoad] = useState(false);
   const [rows, setRows] = useState([])
-  // const [keys, setKeys] = useState([])
+  
+  let { id_evolucion_prescripcion} = useParams(); 
 useEffect(()=>{
-  console.log('props desde evoluciones',(location as any).state.datosFila.id_evolucion_prescripcion)
-  props.fetchDetallesEvolucionesPrescripcionesByEvolucionPrescripcionId((location as any).state.datosFila.id_evolucion_prescripcion);
+  console.log('id_evoluciones desde principal',id_evolucion_prescripcion)
+  props.fetchDetallesEvolucionesPrescripcionesByEvolucionPrescripcionId(id_evolucion_prescripcion);
   console.log('evolcuones prescripciones', props)
 },[])
 

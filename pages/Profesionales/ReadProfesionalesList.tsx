@@ -18,7 +18,7 @@ import profesionalStyles from './profesionalStyles/index.module.css'
 import AddIcon from '@mui/icons-material/Add';
 
 import { fetchProfesionalesByEspecialidadId } from "../../redux/actions/profesionales";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {TableProfesionales} from '../../interfaces'
 import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
@@ -33,9 +33,11 @@ const ReadProfesionalesList = (props:any) => {
   const location = useLocation();
   const [didLoad, setDidLoad] = useState(false);
   const [rows, setRows] = useState([])
-  // const [keys, setKeys] = useState([])
+  let { id } = useParams(); 
+
 useEffect(()=>{
-  props.fetchProfesionalesByEspecialidadId((location as any).state.datosFila.id);
+  console.log('recibieindo id de especialida', id)
+  props.fetchProfesionalesByEspecialidadId(id);
   console.log('Profesionales',props.profesionales)
 },[])
 
@@ -89,7 +91,7 @@ useEffect(()=>{
       <>
       
       <NavLink  
-        to='new'
+        to={`${id}/new`}
         className = {profesionalStyles.createButton}
         state={location.state}
       > 

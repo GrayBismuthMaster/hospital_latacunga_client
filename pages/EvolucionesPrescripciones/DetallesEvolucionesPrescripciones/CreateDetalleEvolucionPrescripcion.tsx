@@ -4,16 +4,11 @@ import { Toaster} from 'react-hot-toast'
 import Modal from '../../../components/Modal/Modal';
 import {connect} from 'react-redux'
 import {detallesEvolucionesPrescripciones} from '../../../redux/actions'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import HospitalLatacungaApi from '../../../apis/HospitalLatacungaApi';
-import {DatePickerField} from '../../../components/DatePicker/DatePicker'
-
 import { DetallesEvolucionesPrescripcionesData } from '../../../data/detallesEvolucionesPrescripciones/DetallesEvolucionesPrescripcionesData';
 
 import { FieldFormik } from '../../../components/FormikFields/FieldFormik';
-import { Dropdown } from 'semantic-ui-react';
-import { TableUsers } from '../../../interfaces';
 //SELECT 
 import Select from 'react-select'
 
@@ -26,10 +21,10 @@ const CreateDetalleEvolucionPrescripcion = (props : any) => {
     const componentRef = useRef();
     //create ref to store the modal
     const location = useLocation();
+    
+  let { id_evolucion_prescripcion} = useParams(); 
     useEffect(() => {
         
-        //PROP DE CONSULTORIO
-        console.log('objeto recibido de location desde evoluciones', location.state)
       return () => {
         
       };
@@ -44,9 +39,7 @@ const CreateDetalleEvolucionPrescripcion = (props : any) => {
                 onSubmit = {async (values, {resetForm})=>{
                     //LA IMAGEN Y EL ESTADO ENVIO
                     console.log('valores del form',values);
-                    console.log('valores del state', location.state)
 
-                    const {id_evolucion_prescripcion, }  = (location as any).state.datosFila;
                     await props.createDetalleEvolucionPrescripcion({ ... values, id_evolucion_prescripcion });
                     resetForm();
                 }}

@@ -4,7 +4,7 @@ import { Toaster} from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal';
 import {connect} from 'react-redux'
 import {evolucionesPrescripciones} from '../../redux/actions'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import notificationStyles from '../../../../styles/divNotifications/divNotifications.module.css'
 import {useS3Upload} from '../../hooks/useS3Upload';
@@ -31,8 +31,10 @@ const CreateEvolucionPrescripcion = (props : any) => {
     const componentRef = useRef();
     //create ref to store the modal
     const location = useLocation();
+    
+    let { id_historia_clinica, id_consultorio, id_usuario_historia_clinica } = useParams(); 
     useEffect(() => {
-        
+        console.log('id de HC y COnsultorio', id_historia_clinica, id_consultorio, id_usuario_historia_clinica);
         //PROP DE CONSULTORIO
         console.log('objeto recibido de location desde evoluciones', location.state)
       return () => {
@@ -52,9 +54,7 @@ const CreateEvolucionPrescripcion = (props : any) => {
                     console.log('valores del form',values);
                     console.log('valores del state', location.state)
 
-                    // let id_especialidad_historia_clinica = (location as any).state.datosFila.id;
-                    const {historia_clinica_id, usuario_historia_clinica, consultorio_historia_clinica}  = (location as any).state.datosFila;
-                    await props.createEvolucionPrescripcion({ ... values, historia_clinica_id, id_usuario_evolucion_prescripcion :  usuario_historia_clinica.id,  id_consultorio_evolucion_prescripcion : consultorio_historia_clinica  });
+                    await props.createEvolucionPrescripcion({ ... values, historia_clinica_id : id_historia_clinica, id_usuario_evolucion_prescripcion :  id_usuario_historia_clinica,  id_consultorio_evolucion_prescripcion : id_consultorio  });
                     // resetForm();
                 }}
             >

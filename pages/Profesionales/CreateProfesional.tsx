@@ -4,7 +4,7 @@ import { Toaster} from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal';
 import {connect} from 'react-redux'
 import {profesionales} from '../../redux/actions'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import {useS3Upload} from '../../hooks/useS3Upload';
 import HospitalLatacungaApi from '../../apis/HospitalLatacungaApi';
@@ -26,6 +26,9 @@ const CreateProfesional = (props : any) => {
     const componentRef = useRef();
     const location = useLocation();
     const [fileName, setFileName] = useState('');
+    
+    let { id } = useParams(); 
+
     //RENDERIZACION IMAGENES
         const renderImageField = (formikProps:any)=>{
             return (
@@ -38,7 +41,7 @@ const CreateProfesional = (props : any) => {
                                                 
         //FETCH CONSULTORIOS CON USEEFFECT
         useEffect(() => {
-            console.log('especialidad', location.state)
+            console.log('especialidad', id)
             // props.fetchConsultorios();
             return () => {
             
@@ -93,7 +96,7 @@ const CreateProfesional = (props : any) => {
                         const { signedRequest, url } = res.data;
                         const resUpload = await uploadToS3((values as any).imagen, signedRequest);
                         console.log("RESPUESTA DE S3", resUpload, "URL", url);
-                        await props.createProfesional({ ... values,especialidad_id : (location as any).state.datosFila.id, imagen_profesional : url, estado_profesional : true});
+                        await props.createProfesional({ ... values,especialidad_id : id, imagen_profesional : url, estado_profesional : true});
                     })
                     resetForm();
                 }}

@@ -34,7 +34,7 @@ export const FieldFormik = ({...props}:any)=>{
             </label>
 
             <span className={styles.form_line}></span>
-            {/* {errors.id_usuario ?? <div className = {notificationStyles.error}>{errors.id_usuario}</div>} */}
+            {/* {props.errors[props.name] ?? <div >Muerte</div>} */}
         </div>
     )
 }

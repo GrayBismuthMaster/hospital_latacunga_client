@@ -4,7 +4,7 @@ import { Toaster} from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal';
 import {connect} from 'react-redux'
 import {especialidades} from '../../redux/actions'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 import notificationStyles from '../../../../styles/divNotifications/divNotifications.module.css'
 import {useS3Upload} from '../../hooks/useS3Upload';
@@ -20,16 +20,15 @@ import { fetchConsultorios } from "../../redux/actions/consultorios";
 
 const CreateEspecialidad = (props : any) => {
     
+    const [consultorio, setConsultorio] = useState("");
     //CUSTOM HOOK PARA S3 UPLOAD
         const { s3State, setS3State, formatFilename, uploadToS3} = useS3Upload();
     //FIN CUSTOM HOOK
-    const navigate = useNavigate();
     const componentRef = useRef();
     //create ref to store the modal
-    console.log("ref desde create especialidad ")
-    console.log(componentRef)
-
+    const location = useLocation();
     useEffect(() => {
+        console.log(location.state);
         props.fetchConsultorios();
         // const arregloDropdown = props.consultorios.map((consultorio:any)=>{
         //     return {value : consultorio.id, text : consultorio.nombre_consultorio}
@@ -44,21 +43,13 @@ const CreateEspecialidad = (props : any) => {
                 initialValues={{
                     nombre_especialidad : "",
                 }}
-                // validate = {(values)=>{
-                //     let errores = {nombre_especialidad : '', telefono : '', correo : '', especialidad : '', password : ''};
-                //     if(!values.nombre_especialidad){
-                //         errores.nombre_especialidad =   'Ingresa un nombre pelao';
-                //     }else if(!/^[0-9\s]{1,10}$/.test(values.telefono)){
-                //         errores.telefono = "Por favor ingrese un num telefonico";
-                //     }else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.correo)){
-                //         errores.correo =  "Por favor ingrese un correo electrónico válido"
-                //     }else if(!values.especialidad){
-                //         errores.especialidad = "Por favor ingrese un especialidad"
-                //     }else if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(values.password)){
-                //         errores.password = "La contraseña debe tener mínimo 8 caracteres, máximo 15, al menos una letra mayúscula, una minúscula, un dígito, sin espacios en blanco,1 caracter especial";
-                //     }
-                //     return errores;
-                //  }}
+                validate = {(values)=>{
+                    let errores = {nombre_especialidad : ''};
+                    if(!values.nombre_especialidad){
+                        errores.nombre_especialidad =   'Ingresa un nombre pelao';
+                    }
+                    return errores;
+                 }}
                 onSubmit = { async (values, {resetForm})=>{
                     if((values as any).imagen){
                         //LA IMAGEN Y EL ESTADO ENVIO
@@ -85,7 +76,7 @@ const CreateEspecialidad = (props : any) => {
                     ({handleSubmit, values, setFieldValue})=>
                     (
                        
-                        <Modal forwardRef={componentRef} title = {'Crear Especialidad'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
+                        <Modal prevLocation ={location.pathname} forwardRef={componentRef} title = {'Crear Especialidad'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
                             <Form  className={styles.form} onSubmit={handleSubmit}>
                                 <div  className={styles.form_container_left_right}>    
                                     <div className={styles.form_container}>
@@ -110,8 +101,12 @@ const CreateEspecialidad = (props : any) => {
                                                     return {value : consultorio.id, text : consultorio.nombre_consultorio}
                                                 })
                                             }
-                                            value={values.nombre_especialidad}
-                                            onChange={(_, { value }) => setFieldValue("consultorio_id", value)}
+                                            value={consultorio}
+                                            onChange={(_, { value, text }) => {
+                                                setFieldValue("consultorio_id", value);
+                                                console.log(value)
+                                                setConsultorio((text as any));
+                                            }}
                                         />
                                         {/* FIN CAMPO PARA CONSULTORIOS  */}
                                     </div>

@@ -35,7 +35,7 @@ const Navbar = (props:any)=> {
                    <img alt="Logo" src={logoDashboard} className={styles.logoDashboard}></img>
                </div>
                <div className={styles.navBarRight}>
-                   <div className={styles.navBarIconContainer}>
+                   {/* <div className={styles.navBarIconContainer}>
                             <NotificationsNone/>
                             <span className={styles.navBarIconBadge}>5</span>
                    </div>
@@ -46,7 +46,7 @@ const Navbar = (props:any)=> {
                    <div className={styles.navBarIconContainer}>
                             <Settings/>
                             <span className={styles.navBarIconBadge}>5</span>
-                   </div>
+                   </div> */}
                    <li className={styles.navBarIconContainerList}>
                         <img src={props.userData.datosUsuario.imagen} alt="Imagen de perfil" className={styles.imgUsuario}></img>
                         <ul className={styles.itemsImgUsuario}>

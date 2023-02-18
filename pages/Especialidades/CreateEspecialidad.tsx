@@ -44,11 +44,11 @@ const CreateEspecialidad = (props : any) => {
                     nombre_especialidad : "",
                 }}
                 validate = {(values)=>{
-                    let errores = {nombre_especialidad : ''};
-                    if(!values.nombre_especialidad){
-                        errores.nombre_especialidad =   'Ingresa un nombre pelao';
-                    }
-                    return errores;
+                    // let errores = {nombre_especialidad : ''};
+                    // if(!values.nombre_especialidad){
+                    //     errores.nombre_especialidad =   'Ingresa un nombre pelao';
+                    // }
+                    // return errores;
                  }}
                 onSubmit = { async (values, {resetForm})=>{
                         await props.createEspecialidad({ ... values, estado_especialidad : true});
@@ -85,7 +85,7 @@ const CreateEspecialidad = (props : any) => {
                                             value={consultorio}
                                             onChange={(_, { value, text }) => {
                                                 setFieldValue("consultorio_id", value);
-                                                console.log(value)
+                                                console.log("id de consultorio",value)
                                                 setConsultorio((text as any));
                                             }}
                                         />

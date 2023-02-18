@@ -51,31 +51,12 @@ const CreateEspecialidad = (props : any) => {
                     return errores;
                  }}
                 onSubmit = { async (values, {resetForm})=>{
-                    if((values as any).imagen){
-                        //LA IMAGEN Y EL ESTADO ENVIO
-                        console.log('valores del form',values);
-                        console.log((values as any).imagen.type)
-                        await HospitalLatacungaApi.post('/uploads/signS3',{
-                            fileName :formatFilename((values as any).imagen.name),
-                            fileType : (values as any).imagen.name
-                        }).then(async (res)=>{
-                            console.log("respues",res);
-                            const { signedRequest, url } = res.data;
-                            const resUpload = await uploadToS3((values as any).imagen, signedRequest);
-                            console.log("RESPUESTA DE S3", resUpload, "URL", url);
-                            await props.createEspecialidad({ ... values, imagen : url, estado_especialidad : true});
-                        })
-                        resetForm();
-                    }else{
-                        
                         await props.createEspecialidad({ ... values, estado_especialidad : true});
-                    }
                 }}
             >
                 {
                     ({handleSubmit, values, setFieldValue})=>
                     (
-                       
                         <Modal prevLocation ={location.pathname} forwardRef={componentRef} title = {'Crear Especialidad'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
                             <Form  className={styles.form} onSubmit={handleSubmit}>
                                 <div  className={styles.form_container_left_right}>    
@@ -110,8 +91,6 @@ const CreateEspecialidad = (props : any) => {
                                         />
                                         {/* FIN CAMPO PARA CONSULTORIOS  */}
                                     </div>
-                                        
-                                
                                 </div>
                                 <input type="submit" className={styles.form_submit} value="Crear Especialidad" />       
                             </Form>

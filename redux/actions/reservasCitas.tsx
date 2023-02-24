@@ -61,3 +61,13 @@ export const editReservaCita = (userId :any, formValues : any) => async (dispatc
 
         })
 }
+export const deleteReservaCita = (userId :any) => async (dispatch:any) => {
+    console.log('id',userId);
+    // console.log('valores desde el action', formValues)
+    await HospitalLatacungaApi.delete(`/reservasCitas/${userId}`);
+    dispatch({type : 'DELETE_RESERVA_CITA', payload : userId});
+    
+    toast.success('Reserva eliminada correctamente', {
+        position: 'top-center'
+    })
+}

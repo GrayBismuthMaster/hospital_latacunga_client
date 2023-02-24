@@ -31,7 +31,11 @@ const CreateReservaCitas = (props:any) => {
         profesionales : []
     });
   useEffect(() => {
-    console.log('props desde rol de usuario',props)
+    console.log('props desde rol de usuario',props.rol)
+    console.log("roles", Roles.admin)
+    if(props.rol === Roles.admin){
+        console.log('es admin')
+    }
     props.fetchConsultorios();
     props.fetchEspecialidades();
     props.fetchProfesionales();
@@ -90,10 +94,9 @@ const CreateReservaCitas = (props:any) => {
                     console.log(rol)
                     console.log(Roles.user)
                     if(rol === Roles.user){
-                        
                         await props.createReservaCita({ ... values,id_usuario_reserva_cita, fecha_hora_inicio_reserva, fecha_hora_fin_reserva, estado_reserva : EstadoReserva.PENDIENTE  });
                     }else{
-                        await props.createReservaCita({ ... values, fecha_hora_inicio_reserva, fecha_hora_fin_reserva, estado_reserva : EstadoReserva.PENDIENTE  });
+                        await props.createReservaCita({ ... values,id_usuario_reserva_cita : dropdownUserSelectedValue, fecha_hora_inicio_reserva, fecha_hora_fin_reserva, estado_reserva : EstadoReserva.PENDIENTE  });
                     }
                         
                     // resetForm();
@@ -103,11 +106,14 @@ const CreateReservaCitas = (props:any) => {
                     ({handleSubmit, values, setFieldValue}:any)=>
                     (
                        
-                        <Modal forwardRef={componentRef} title = {'Crear HistoriaClinica'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
+                        <Modal forwardRef={componentRef} title = {'Crear Reserva de Cita'} image = {'https://images.pexels.com/photos/8978449/pexels-photo-8978449.jpeg?cs=srgb&dl=pexels-meruyert-gonullu-8978449.jpg&fm=jpg'}>
                             <Form  className={styles.form} onSubmit={handleSubmit}>
                                 <div  className={styles.form_container_left_right}>    
                                     <div className={styles.form_container}>
                                         
+                                        
+                                        {/* FIN CAMPO PARA USUARIOS  */}
+
                                         {
                                             ReservasCitasData.map((valores:any, index : number)=>{
                                                 return (
@@ -183,10 +189,11 @@ const CreateReservaCitas = (props:any) => {
                                             <>
                                             </>
                                         }
+                                        
                                         {/* CAMPO PARA USUARIOS */}
                                         {
-                                            props.rol !== Roles.user
-                                                ??
+                                            props.rol === Roles.admin
+                                                ?
                                                 <Dropdown
                                                 selection
                                                 placeholder="Seleccione usuario"
@@ -201,10 +208,8 @@ const CreateReservaCitas = (props:any) => {
                                                     setDropdownUserSelectedValue(value)
                                                 }}
                                             />
+                                            : null
                                         }
-                                        
-                                        {/* FIN CAMPO PARA USUARIOS  */}
-                                        
                                         
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ import { EstadoReserva, ReservaCita, Roles } from '../../interfaces';
 const fetchReservasCitas = reservasCitas.fetchReservasCitas;
 const fetchReservasCitasByUserId = reservasCitas.fetchReservasCitasByUserId;
 const editReservaCita = reservasCitas.editReservaCita;
-
+const deleteReservaCita = reservasCitas.deleteReservaCita;
 const ReservasCitasList =(props : any) =>{
     
     const navigate = useNavigate();
@@ -133,15 +133,18 @@ const ReservasCitasList =(props : any) =>{
                                    
                                       default:
                                         console.log('valor evento aceptasdo',event);
-                                        props.editReservaCita(event.id_reserva,{
-                                            estado_reserva : EstadoReserva.CANCELADO
-                                        });
+                                        
+                                        //ELIMINO LAS RESERVAS DE LAS CITAS
+                                        props.deleteReservaCita(event.id_reserva);
+                                        // props.editReservaCita(event.id_reserva,{
+                                        //     estado_reserva : EstadoReserva.CANCELADO
+                                        // });
                                         break;
                                     }
                                   });
                             }else{
                                 (swal as any)({
-                                    text: '¿Está seguro que desea cancelar la reserva?',
+                                    text: '¿Está seguro que desea finalizar la reserva?',
                                     buttons: {
                                         cancel: "NO",
                                         defeat: "SI",
@@ -152,6 +155,8 @@ const ReservasCitasList =(props : any) =>{
                                    
                                       case "defeat":
                                         console.log('valor evento aceptasdo',event);
+                                        
+                                        props.deleteReservaCita(event.id_reserva);
                                         props.editReservaCita(event.id_reserva,{
                                             estado_reserva : EstadoReserva.CANCELADO
                                         });
@@ -303,6 +308,6 @@ const mapStateToProps = (state:any) => {
 //El null es el estado actual del componente y el segundo parametro es la action que se pasa por parametro
 export default connect(
     mapStateToProps, 
-    {fetchReservasCitas, fetchReservasCitasByUserId, editReservaCita}
+    {fetchReservasCitas, fetchReservasCitasByUserId, editReservaCita, deleteReservaCita}
     )( ReservasCitasList);
     

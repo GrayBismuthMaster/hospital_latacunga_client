@@ -3,6 +3,7 @@ import './App.css'
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landpage from '../pages/landpage';
 import Login from "../pages/login";
+import Register from "../pages/register";
 import Home from "../pages/home";
 //INCIO USERS
 import Users from "../pages/users";
@@ -71,6 +72,7 @@ function App() {
           
           <Route path="/" element={<Landpage />}/>
           <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register/>}/>
           
               {/* PRIVATE ROUTES */}
           <Route element={<ProtectedRoutes/>}>  

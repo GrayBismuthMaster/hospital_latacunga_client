@@ -1,12 +1,11 @@
 import { useState, useRef} from 'react';
-import styles from './userStyles/index.module.css';
+import styles from './index.module.css';
 import { Toaster} from 'react-hot-toast'
 import Modal from '../../components/Modal/Modal';
 import {connect} from 'react-redux'
 import {users} from '../../redux/actions'
 import { useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import notificationStyles from '../../../../styles/divNotifications/divNotifications.module.css'
 import {useS3Upload} from '../../hooks/useS3Upload';
 import HospitalLatacungaApi from '../../apis/HospitalLatacungaApi';
 import {DatePickerField} from '../../components/DatePicker/DatePicker'
@@ -15,12 +14,12 @@ import { FieldFormik } from '../../components/FormikFields/FieldFormik';
 //Redux form
 const createUser = users.createUser;
 
-const CreateUser = (props : any) => {
+const RegisterForm = (props : any) => {
     
     //CUSTOM HOOK PARA S3 UPLOAD
         const { s3State, setS3State, formatFilename, uploadToS3} = useS3Upload();
     //FIN CUSTOM HOOK
-    const navigate = useNavigate();
+    const navigation = useNavigate();
     const componentRef = useRef();
     //create ref to store the modal
     console.log("ref desde create user ")
@@ -72,7 +71,8 @@ const CreateUser = (props : any) => {
                         const { signedRequest, url } = res.data;
                         const resUpload = await uploadToS3((values as any).imagen, signedRequest);
                         console.log("RESPUESTA DE S3", resUpload, "URL", url);
-                        await props.createUser({ ... values, imagen : url, estado : true});
+                        await props.createUser({ ... values, imagen : url, estado : true, id_rol : '2'});
+                        navigation('/login');
                     })
                     resetForm();
                 }}
@@ -147,30 +147,6 @@ const CreateUser = (props : any) => {
                                             </div> 
                                         </div>
 
-                                        <div className={styles.form_group}>
-                                            <span className={styles.select_label}>Roles</span>
-                                            
-                                            <div className = {styles.checkBoxContainer}>
-                                                <div className= {styles.checkBoxVerticalContainer}>
-                                                    <span>Administrador</span>
-                                                    <span>Usuario</span>
-                                                </div>
-                                                <div className={styles.checkBoxVerticalContainer}>
-                                                <Field
-                                                    name="id_rol"
-                                                    type="radio"
-                                                    value={"1"}
-                                                />
-                                                <Field
-                                                    name="id_rol"
-                                                    type="radio"
-                                                    value={"2"}
-                                                />
-                                                     
-                                                </div>
-                                            </div> 
-                                        </div>
-
                                         
                                     </div>
                                 </div>
@@ -187,4 +163,4 @@ const CreateUser = (props : any) => {
 export default connect(
     null,
     {createUser}
-)(CreateUser)
+)(RegisterForm)

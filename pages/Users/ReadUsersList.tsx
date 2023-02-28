@@ -197,22 +197,6 @@ useEffect(()=>{
                   </TableRow>
                 )
               })
-              //RECORRIDO POR ARRAY
-
-                // rows.map((row:any) => (
-                //   <TableRow key={row.USER} >
-                //     <TableCell component="th" scope="row">
-                //       {row.ID}
-                //     </TableCell>
-                //     <TableCell align="right">{row.ID_USUARIO}</TableCell>
-                //     <TableCell align="right">{row.USER}</TableCell>
-                //     <TableCell align="right">{row.ROL}</TableCell>
-                //     <TableCell align="right">{row.NOMBRE_USER}</TableCell>
-                //     <TableCell align="right">{row.TELEFONO}</TableCell>
-                //     <TableCell align="right">{row.CORREO}</TableCell>
-                //     <TableCell align="right" ><EditIcon id={JSON.stringify({ID : row.ID, ID_USUARIO : row.ID_USUARIO, USER: row.USER, ROL: row.ROL, NOMBRE_USER : row.NOMBRE_USER, TELEFONO : row.TELEFONO, CORREO : row.CORREO})} sx={{ color: yellow[700] }} className={styles.icon} onClick={(props)=>{editRow(props)}}  />            <DeleteIcon id={JSON.stringify({ID : row.ID, NOMBRE_USER : row.NOMBRE_USER, ID_USUARIO : row.ID_USUARIO})} sx={{ color: red[600] }} className={styles.icon} onClick={(props)=>{deleteRow(props)}}/></TableCell>
-                //   </TableRow>
-                // ))
             }
 
             </TableBody>
